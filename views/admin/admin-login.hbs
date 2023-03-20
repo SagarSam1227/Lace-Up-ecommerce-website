@@ -1,0 +1,49 @@
+
+      <section class="background-radial-gradient overflow-hidden"> 
+  
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+      <div class=" gx-lg-5 align-items-center mb-5" style="
+    margin: auto;
+    width: fit-content">
+       
+  
+        <div class="lg-6 mb-5 mb-lg-0 position-relative">
+          
+  
+          <div class="card bg-glass">
+            <div class="card-body px-4 py-5 px-md-5 opacity-70">
+              <form action="/admin/dashboard" method="post" >
+                
+                <h4>ADMIN LOGIN</h4>
+                <br>
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <label class="float-left">Username</label>
+                  <input type="email" id="form3Example3" class="form-control"name="username"  />
+                </div>
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  <label class="float-left">Password</label>
+                  <input type="password" id="form3Example4" class="form-control" name="password"  />
+                  
+                </div>
+  
+                {{#if adminErr}}
+                  <span style="color: red;">{{adminErr}}</span>
+                {{/if}}
+                
+                <!-- Submit button -->
+                <br>
+                <br>
+                <button type="submit" class="btn btn-info mb-4">
+                  LOGIN
+                </button>
+                <br>
+               
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

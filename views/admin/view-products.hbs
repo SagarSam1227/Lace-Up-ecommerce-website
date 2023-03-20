@@ -1,0 +1,46 @@
+
+
+<section>
+    <div class="container mt-5">
+<table class="table table-hover" style="margin-top:5em">
+    <div class="btn btn-info mb-5" style=" margin-top:3em; ">
+        <a style="color: white;" href="/admin/add-product">Add Product</a>
+    </div>
+  <thead>
+    <tr>
+        <th scope="col">No.</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      {{!-- <th scope="col">prize</th> --}}
+      <th scope="col">image</th>
+    </tr>
+  </thead>
+  <tbody>
+    <br>
+    {{#each products}}
+    
+    <tr>
+      <th scope="row">{{@index}}</th>
+      <td>{{name}}</td>
+      <td>{{description}}</td>
+      <td><img style="height: 50px; width:50px" src="/product-images/{{this._id}}.jpg" alt=""></td>
+    <td><a class="" href="/admin/edit-product/{{_id}}"><img src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Compose-512.png" style="height: 1.5em;width:1.5em" alt=""></a></td>
+      <td><a class="" onclick="return confirm('Do you want to delete {{this.name}}')" href="/admin/delete-product/{{_id}}"><img src="https://www.freeiconspng.com/thumbs/delete-button-png/x-delete-button-png-15.png" style="height: 1.5em;width:1.5em"  alt=""></a></td>
+    </tr>
+
+    {{/each}}
+    {{!-- <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr> --}}
+  </tbody>
+</table>
+    </div>
+</section>

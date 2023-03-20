@@ -1,0 +1,75 @@
+<section class="content-main">
+
+            <div class="card" style="margin-top: 7em;" >
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <form action="/admin/categories" method="post">
+                              <div class="mb-4">
+                                    <label class="form-label">Category</label>
+                                    <select class="form-select" name="category">
+                                        <option><a href="" >Men</a></option>
+                                        <option><a href="">Women</a></option>
+                                        <option><a href="">Kids</a></option>
+                                    </select>
+                                </div> 
+                                <div class="mb-4">
+                                    <label for="product_slug" class="form-label">Sub category</label>
+                                    <input type="text" placeholder="Type here" class="form-control" id="product_slug" name="subcategory" />
+                                </div>
+                               
+                                <div class="mb-4">
+                                    <label class="form-label">Description</label>
+                                    <textarea name="description" placeholder="Type here" class="form-control"></textarea>
+                                </div>
+                                <div class="d-grid">
+                                    <button  class="btn btn-primary">create</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" />
+                                                </div>
+                                            </th>
+                                            <th>category</th>
+                                            <th>sub category</th>
+                                            <th>Description</th>
+                                            <td>products</td>
+                                            {{!-- <td>Delete</td> --}}
+                                        </tr>
+                                    </thead>
+
+                                {{#each data}}
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" />
+                                                </div>
+                                            </td>
+                                            <td>{{category}}</td>
+                                            <td>{{sub}}</td>
+                                            <td>{{description}}</td>
+                                            <td>60</td>
+                                            <td>
+                                                <button class="badge rounded-pill alert-info" style="height: 3em;width: 6em; background-color:rgb(34, 217, 202); border:none" >
+                                                    <a href="" style="color: black;">delete</a>
+                                                    </button></td>
+                                        </tr>
+                                        <tr>
+                                    </tbody>
+
+                                    {{/each}}
+                                </table>
+                            </div>
+                        </div> <!-- .col// -->
+                    </div> <!-- .row // -->
+                </div> <!-- card body .// -->
+            </div> <!-- card .// -->
+        </section> <!-- content-main end// -->

@@ -1,0 +1,3 @@
+const ENUMS = Object.freeze({
+    
+})

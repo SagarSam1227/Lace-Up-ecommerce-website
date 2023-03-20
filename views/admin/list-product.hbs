@@ -1,0 +1,62 @@
+
+<section>
+    <div class="container mt-5">
+<table class="table table-hover" style="margin-top:5em">
+{{#if data}}
+    <div class="btn btn-info mb-5" style=" margin-top:3em; ">
+        <a style="color: white;" href="/admin/add-product">Add Product</a>
+    </div>
+    
+  <thead>
+    <tr>
+        <th scope="col">No.</th>
+      <th scope="col">Name</th>
+      <th scope="col">Category</th>
+      <th scope="col">price</th>
+      {{!-- <th scope="col">prize</th> --}}
+      <th scope="col">image</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <br>
+
+    {{#each data}}
+    
+    <tr>
+      <th scope="row">{{@index}}</th>
+      <td>{{name}}</td>
+      <td>{{category}}</td>
+      <td>{{newPrice}}</td>
+      <td><img style="height: 50px; width:50px" src="/uploads/{{Image}}" alt=""></td>
+    <td><a class="" href="/admin/edit-product/{{_id}}"><img src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Compose-512.png" style="height: 2em;width:2em" alt=""></a></td>
+      <td><a class="" onclick="return confirm('Do you want to delete {{this.name}}')" href="/admin/delete-product/{{_id}}" ><img src="https://cdn-icons-png.flaticon.com/512/1345/1345874.png" style="height: 2em;width:2em"  alt=""></a></td>
+
+    </tr>
+
+    {{/each}}
+    {{else}}
+    <div class="container text-center"><a href="/admin/add-product">
+      <img src="https://img.freepik.com/free-icon/add-button_318-757580.jpg?size=338&ext=jpg&ga=GA1.2.1909228246.1667835325&semt=ais" alt="ee" style="height:13em; width:13em;margin-top: 9em;">
+    </a>
+    
+    <h3 style="margin-top:1em">add products</h3>
+</div>
+{{/if}}
+    {{!-- <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr> --}}
+  </tbody>
+</table>
+    </div>
+</section>

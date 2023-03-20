@@ -1,0 +1,40 @@
+
+   <section class="pt-150 pb-150" >
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 m-auto">
+                        <div class="row">
+                            <div class="col-lg-5"style="margin-top: -45px;margin-left: 20em;">
+                                <div class="login_wrap widget-taber-content p-30 background-white border-radius-10 mb-md-5 mb-lg-0 mb-sm-5">
+                                    <div class="padding_eight_all bg-white">
+                                        <div class="heading_s1">
+                                            <h4 class="mb-30" style="margin-inline: 6em;">OTP LOGIN</h4>
+                                        </div>
+                                        <br>
+                                        <form action="/otp-login" method="post">
+                                            <div class="form-group">
+                                                <label class="float-left">MObile No.</label>
+                                                <input type="text" required="" name="mobile" placeholder="Your mobileNo.">
+                                            </div>
+                                            {{#if stsErr}}
+                                            <div class="alert alert-warning" role="alert">
+                                            <a href="" style="margin-left: 1em;">{{stsErr}}</a>
+                                                <img src="https://cdn-icons-png.flaticon.com/512/3756/3756730.png" style="    height: 1.5em; width: 1.5em; margin-bottom: -0.3em;" alt="">
+                                            </div>
+                                            {{/if}}
+                                            {{#if accErr}}
+                                            <div class="alert alert-danger" role="alert">
+
+                                            <a href="" style="margin-left: 1em;">{{accErr}}</a>
+                                                <img src="https://cdn-icons-png.flaticon.com/512/1182/1182679.png" style="height: 1.3em; width: 1.3em; margin-bottom: -0.3em;" alt="">
+                                            </div>
+                
+                                            {{/if}}
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-fill-out btn-block hover-up" style="margin-top: 4em;" name="login">Log in</button>
+                                            </div>
+                                            <br>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>

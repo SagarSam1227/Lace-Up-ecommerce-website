@@ -1,0 +1,68 @@
+
+
+<section>
+    <div class="container mt-5">
+<table class="table table-hover" style="margin-top:5em">
+
+  <thead>
+    <tr>
+        {{!-- <th scope="col">No.</th> --}}
+      <th scope="col">Name</th>
+      <th scope="col">Mail Id</th>
+      {{!-- <th scope="col">prize</th> --}}
+      <th scope="col">Status</th>
+      <th scope="col">State</th>
+      {{!-- <th scope="col">Block</th> --}}
+      
+    </tr>
+  </thead>
+  <tbody>
+    <br>
+
+    {{#each data}}
+    
+    <tr>
+      {{!-- <th scope="row">{{@index}}</th> --}}
+      <td>{{name}}</td>
+    <td>{{email}}</td>
+
+  {{#if status}}
+  <td><span class="badge rounded-pill alert-success" style="width:5em">Active</span></td>
+    <td>
+<button class="badge rounded-pill alert-info" style="height: 3em;width: 6em;">
+  <a href="/admin/user-block/{{_id}}">block</a>
+</button>
+{{!-- <a class="" href="/admin/user-block/{{_id}}"><img src="https://cdn-icons-png.flaticon.com/512/4067/4067568.png" style="height: 2em;width:2em" alt=""></a> --}}
+
+    
+    </td>
+    {{else}}
+    <td>
+      <span class="badge rounded-pill alert-danger" style="width:5em">Inactive</span>
+    </td>
+  <td>
+<button class="badge rounded-pill alert-alert" style="height: 3em;width: 6em;">
+  <a href="/admin/user-unblock/{{_id}}">unblock</a>
+</button>
+    </td>
+    {{/if}}
+
+
+    </tr>
+
+    {{/each}}
+    {{!-- <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr> --}}
+  </tbody>
+</table>
+    </div>
+</section>
