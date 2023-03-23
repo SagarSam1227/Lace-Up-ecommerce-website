@@ -1,0 +1,264 @@
+<div class="container" style="margin-top: 7em;margin-bottom: 7em;">
+    <div class="main-body">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card" style="margin-left: 9em;margin-right: -1em;">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="https://cdn-icons-png.flaticon.com/512/219/219970.png" alt="Admin"
+                                class="rounded-circle p-1 bg-info" width="110">
+                            <div class="mt-3">
+                                <h4>John Doe</h4>
+
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <ul class="list-group list-group-flush">
+                            <li class="list d-flex justify-content-between align-items-center flex-wrap"
+                                style="font-size: 1.2em;text-align: center;padding-left: 4em;">
+                                <a href="">Orders</a>
+                            </li>
+                            <br>
+                            <li class="list d-flex justify-content-between align-items-center flex-wrap"
+                                style="font-size: 1.2em;text-align: center;padding-left: 2em;">
+                                <a href="">Change password?</a>
+                            </li>
+                            <br>
+                            <li class="list d-flex justify-content-between align-items-center flex-wrap"
+                                style="font-size: 1.2em;text-align: center;padding-left: 3em;">
+                                <a data-toggle="modal" data-target="#exampleModal">
+                                    New address
+                                </a>
+                            </li>
+                            <br>
+                            <li class="list d-flex justify-content-between align-items-center flex-wrap"
+                                style="font-size: 1.2em;text-align: center;padding-left: 4em;">
+                                <a href="/logout">Logout</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card" style="width: 37em; margin-left: 3em;">
+                    <div class="card-body" style="padding: 3em;">
+                        <div class="row mb-3">
+                            <div class="col-sm-3" style="padding-top: 1em;">
+                                <h6 class="mb-0">Full Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" class="form-control" value="John Doe">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3" style="padding-top: 1em;">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" class="form-control" value="john@example.com">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-3" style="padding-top: 1em;">
+                                <h6 class="mb-0">Mobile</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" class="form-control" value="(320) 380-4539">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-9 text-secondary" style="margin-top: 2.5em;">
+                                <input type="button" class="btn btn-primary px-4" style="background: #337180;"
+                                    value="Save Changes">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <h4 style="padding-left: 3.9em;">Address</h4>
+                <div class="row">
+                    <div class="col-sm-12 pt-3" style="width: 41.8em; padding-left: 3.9em; ">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Address : Thrikkamattathil (H)</h5>
+                                <h5>Peruva P O</h5>
+                                <h5>PERUVA</h5>
+                                <h5>Kottayam</h5>
+                                <h5>Kerala</h5>
+                                <h5>686610</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add Address</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <form method="post">
+                                    <div class="form-group" style="float:left; width: 15.5em;">
+                                        <input type="text" required="" name="fname" placeholder="First name *">
+                                    </div>
+                                    <div class="form-group" style="float: right; width: 15.5em;">
+                                        <input type="text" required="" name="lname" placeholder="Mobile number *">
+                                    </div>
+                                    <div class="form-group" style="float:left; width: 15.5em;">
+                                        <input required="" type="text" name="pincode" placeholder="Pincode *">
+                                    </div>
+                                    <div class="form-group" style="float: right; width: 15.5em;">
+                                        <input required="" type="text" name="locality" placeholder="Locality *">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" required="" placeholder="Address *">
+
+                                    </div>
+                                    <div class="form-group" style="float:left; width: 15.5em;">
+                                        <input required="" type="text" name="city"
+                                            placeholder="City / Town/ District *">
+                                    </div>
+                                    <div class="form-group" style="float: right; width: 15.5em;">
+                                        <input required="" type="text" name="locality" placeholder="State *">
+                                    </div>
+                                    <div class="form-group" style="float:left; width: 15.5em;">
+                                        <input required="" type="text" name="email" placeholder="Landmark (Optional) *">
+                                    </div>
+                                    <div class="form-group" style="float: right; width: 15.5em;">
+                                        <input required="" type="text" name="phone"
+                                            placeholder="Alternate Phone (Optional) *">
+                                    </div>
+
+                            </div>
+                            </form>
+                            <div class="modal-footer">
+                                <button type="button" style="    padding-inline: 2em;margin-right: 2em;"
+                                    class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+{{!-- <div class="card" style="width: 39em;padding: 2em;">
+    <div class="card-body">
+        <form method="post">
+            <div class="form-group" style="float:left; width: 15.5em;">
+                <input type="text" required="" name="fname" placeholder="First name *">
+            </div>
+            <div class="form-group" style="float: right; width: 15.5em;">
+                <input type="text" required="" name="lname" placeholder="Mobile number *">
+            </div>
+            <div class="form-group" style="float:left; width: 15.5em;">
+                <input required="" type="text" name="pincode" placeholder="Pincode *">
+            </div>
+            <div class="form-group" style="float: right; width: 15.5em;">
+                <input required="" type="text" name="locality" placeholder="Locality *">
+            </div>
+            <div class="form-group">
+                <input type="text" required="" placeholder="Address *">
+
+            </div>
+            <div class="form-group" style="float:left; width: 15.5em;">
+                <input required="" type="text" name="city" placeholder="City / Town/ District *">
+            </div>
+            <div class="form-group" style="float: right; width: 15.5em;">
+                <div class="custom_select">
+                    <select class="form-control select-active">
+                        <option value="">State...</option>
+                        <option value="AX">Andhra Pradesh</option>
+                        <option value="AF">Arunachal Pradesh</option>
+                        <option value="AL">Assam</option>
+                        <option value="DZ">Bihar</option>
+                        <option value="AD">Chhattisgarh</option>
+                        <option value="AO">Goa</option>
+                        <option value="AI">Gujarat</option>
+                        <option value="AQ">Haryana</option>
+                        <option value="AG">Himachal Pradesh</option>
+                        <option value="AR">Jharkhand</option>
+                        <option value="AM">Karnataka</option>
+                        <option value="AW">Kerala</option>
+                        <option value="AU">Madhya Pradesh</option>
+                        <option value="AT">Maharashtra</option>
+                        <option value="AZ">Manipur</option>
+                        <option value="BS">Meghalaya</option>
+                        <option value="BH">Mizoram</option>
+                        <option value="BD">Nagaland</option>
+                        <option value="BB">Odisha</option>
+                        <option value="BY">Punjab</option>
+                        <option value="PW">Rajasthan</option>
+                        <option value="BE">Sikkim</option>
+                        <option value="BZ">Tamil Nadu</option>
+                        <option value="BJ">Telangana</option>
+                        <option value="BM">Tripura</option>
+                        <option value="BT">Uttar Pradesh</option>
+                        <option value="BO">Uttarakhand</option>
+                        <option value="BO">West Bengal</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" style="float:left; width: 15.5em;">
+                <input required="" type="text" name="email" placeholder="Landmark (Optional) *">
+            </div>
+            <div class="form-group" style="float: right; width: 15.5em;">
+                <input required="" type="text" name="phone" placeholder="Alternate Phone (Optional) *">
+            </div>
+            <div style="padding-inline: 3em;margin-top: 15em;">
+
+                <button type="button" style="padding-inline: 4em;margin-right: 5em;" class="btn btn-secondary"
+                    data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+
+            </div>
+
+
+    </div>
+    </form>
+</div> --}}
+
+<style>
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid transparent;
+        border-radius: .25rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+    }
+
+    .me-2 {
+        margin-right: .5rem !important;
+    }
+</style>
+
+<script>
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+</script>

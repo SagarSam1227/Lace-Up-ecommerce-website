@@ -384,21 +384,32 @@
                             </nav>
                         </div>
                     </div>
-                    <div class="nav-item" role="presentation">
-
                         {{#if user}}
+                    <div class="nav-item" role="presentation" style="margin-left: 40em;">
+
                         <a href="/cart">
+                            <span class="badge badge-pill badge-info" style="width: 2em;background: #2dd2c2;color: black;" id="cart-count">{{count}}</span>
                             <img src="https://cdn-icons-png.flaticon.com/512/891/891462.png" alt=""style="height: 2.5em;margin-right: 3em;">
                         </a>
-                        
-                        <button style="color:#866341;border-radius:50px; border:none">
-                            <a style="" class="" href="/logout">Logout</a>
+                        </div>
+
+                        <div class="dropdown">
+                            
+    <img  class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" src="https://cdn-icons-png.flaticon.com/512/552/552721.png" alt="" style="height:2.5em">
+  
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><p class="dropdown-item">{{user}}</p></li>
+    <li><a class="dropdown-item" href="/user-account">Account</a></li>
+    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+  </ul>
+</div>
+                        {{!-- <button style="color:#866341;border-radius:50px; border:none">
+                            <a style="" class="" href="/logout">Logout</a> --}}
                         {{else}}
                             <button style="color:#866341;border-radius:50px; border:none">
                             <a class="" href="/login">Login / Signup</a>
                         </button>
                         {{/if}}
-                        </div>
                         </div>
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">

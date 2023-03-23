@@ -9,8 +9,12 @@ const sendOtp = require("../middlewares/twilio");
 const { Enqueue } = require("twilio/lib/twiml/VoiceResponse");
 
 module.exports = {
-  userHome: (req, res) => {
+  userHome: async (req, res) => {
     if (req.session.email) {
+      const count = await cartHelper.getTotalCount(req.session.email);
+
+      req.session.count = count;
+
       adminController.displayProducts(req, res, { session: true });
     } else {
       adminController.displayProducts(req, res);
@@ -38,16 +42,20 @@ module.exports = {
     productHelper.findOneProduct(id).then((result) => {
       const data = JSON.parse(JSON.stringify(result));
       if (req.session.email) {
-        res.render("user/productDetails", { user: true, data });
+        res.render("user/productDetails", {
+          user:req.session.email,
+          data,
+          count: req.session.count,
+        });
       } else {
         res.render("user/productDetails", { data });
       }
     });
   },
 
-  postSignup: async(req, res) => {
+  postSignup: async (req, res) => {
     let data = req.body;
-  await cartHelper.insertfirstProduct(data)
+    await cartHelper.insertfirstProduct(data);
     userHelpers.addUser(data).then(res.redirect("/login"));
   },
 
@@ -127,11 +135,15 @@ module.exports = {
           res.redirect("/");
         } else {
           req.session.otpErr = "Invalid Otp";
-          res.redirect("/otp-varification");
+          res.redirect("/otp-varification"); 
         }
       });
     } catch (err) {
       console.log(`error: ${err}`);
     }
   },
+
+  getAccountPage:(req,res)=>{
+    res.render('user/account-Details',{user:req.session.email})
+  }
 };

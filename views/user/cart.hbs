@@ -1,79 +1,95 @@
                 <div class="container-fluid" style="padding-top: 5em; padding-left: 2em; float: left; width:auto">
                     <div class="container" style="height: 17em; width: 54em; float: inherit;">
                         
-                        <div class="hero-card box-shadow-outer-6 wow fadeIn animated mb-30 hover-up d-flex" style="background-color:rgb(255, 255, 255)">
+
+                        {{#each cart}}
+                        <div id="cart-card" class="hero-card box-shadow-outer-6 wow fadeIn animated mb-30 hover-up d-flex" style="background-color:rgb(255, 255, 255)">
                             <div class="hero-card-icon icon-left-2 hover-up ">
-                                <img class="btn-shadow-brand hover-up border-radius-5 bg-brand-muted" src="https://images.pexels.com/photos/2562992/pexels-photo-2562992.png?auto=compress&cs=tinysrgb&w=600" alt="" style="height:6em">
+                                <img class="btn-shadow-brand hover-up border-radius-5 bg-brand-muted" src="uploads/{{products.Image}}" alt="" style="height:6em">
                             </div>
                             <div class="pl-5">
-                                <h4 class="mb-5 fw-500 text-truncate" style="  width: 150px;-webkit-box-orient: vertical;-webkit-line-clamp:3;overflow: hidden;">Nike AirForcesssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssd</h4>
+                                <h4 class="mb-5 fw-500 text-truncate" style="  width: 150px;-webkit-box-orient: vertical;-webkit-line-clamp:3;overflow: hidden;">{{products.name}}</h4>
                                 <p class="font-sm text-grey-5">size:3</p>
                             </div>
-                            <div class="pl-50 pt-15">
+
+
+
+
+                                <div class="detail-qty border radius  m-auto">
+                                                <a onclick="countPlus( '{{products._id}}' , '{{quantity}}' , '1' ,{{products.newPrice}})" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                                <span class="qty-val" id="{{products._id}}">{{quantity}}</span>
+                                                <a onclick="countPlus( '{{products._id}}' , '{{quantity}}' , '-1',{{products.newPrice}} )" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                            </div>
+                                            
+
+                            {{!-- <div class="pl-50 pt-15">
                                 <input type="number" style="width: 5em;">
-                            </div>
+                            </div> --}}
+
+
+
+
+
+
+
+
                             <div class="pl-50 pt-25">
-                                <h5>$677733121</h5>
+                                <h5 id="id-{{products._id}}">₹ {{subTotal}}</h5>
                             </div>
-                    
+
+                            <div onclick="deleteProduct('{{_id}}','{{products._id}}')">
                                 <img style="height: 1.5em;width: 1.5em;margin-top: -1em;" src="https://cdn-icons-png.flaticon.com/512/1828/1828939.png" alt="" style="height:2em; width:3.2em;">
+                            </div>
+
+                               
                             
                         </div>
 
-                                                <div class="hero-card box-shadow-outer-6 wow fadeIn animated mb-30 hover-up d-flex" style="background-color:rgb(255, 255, 255)">
-                            <div class="hero-card-icon icon-left-2 hover-up ">
-                                <img class="btn-shadow-brand hover-up border-radius-5 bg-brand-muted" src="https://images.pexels.com/photos/2562992/pexels-photo-2562992.png?auto=compress&cs=tinysrgb&w=600" alt="" style="height:6em">
-                            </div>
-                            <div class="pl-5">
-                                <h4 class="mb-5 fw-500 text-truncate" style="  width: 150px;-webkit-box-orient: vertical;-webkit-line-clamp:3;overflow: hidden;">Nike AirForcesssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssd</h4>
-                                <p class="font-sm text-grey-5">size:3</p>
-                            </div>
-                            <div class="pl-50 pt-15">
-                                <input type="number" style="width: 5em;">
-                            </div>
-                            <div class="pl-50 pt-25">
-                                <h5>$67773</h5>
-                            </div>
-                    
-                                <img style="height: 1.5em;width: 1.5em;margin-top: -1em;" src="https://cdn-icons-png.flaticon.com/512/1828/1828939.png" alt="" style="height:2em; width:3.2em;">
-                            
-                        </div>
+                        {{/each}}
+
                     
             </div>
            
            {{!-- mainnnnnnnnn --}}
-                    <div class="col-md-4 col-lg-4" style="float:right;margin-left: 7em; margin-top: -15em;" id="proceed">
+                    <div class="col-md-4 col-lg-4" style="float:right;margin-left: 3em; margin-top: -15em;" id="proceed">
                         <div class="hero-card box-shadow-outer-6 wow fadeIn animated mb-50 hover-up d-flex" style="background-color:rgb(255, 255, 255)">
-                            <div class="pl-30" style="width:20em">
-                                <h5 class="mb-5 fw-500" style="text-align: center;">
+                            <div class="pl-30" style="width:23em">
+                                <h5 class="mb-5 fw-500" style="text-align: center;color:rgb(7, 127, 151);font-weight:900;">
                                     PRICE DETAILS
                                 </h5>
                                 <hr>
                                 <div class="d-inline-flex">
-                                <p class="font-l text-black-5">Sub Total</p>
-                                <p class="font-l text-grey-5" style="margin-left: 6.1em;">$7000444</p>
+                                <p class="font-l text-black-5" style="font-weight:700">Sub Total</p>
+                                <p class="font-l text-black-5" style="margin-left: 6.1em;font-weight:700;">₹ {{Total}}</p>
                                </div>
                                 <div class="d-inline-flex">
                                 <p class="font-l text-grey-5">Discount</p>
-                                <p class="font-l text-grey-5" style="margin-left: 6.2em;">$700044334</p>
+                                <p class="font-l text-grey-5" style="margin-left: 6.2em;">₹ 0</p>
                                </div>
                                <div class="d-inline-flex">
                                 <p class="font-l text-grey-5">Delivery Charges</p>
-                                <p class="font-l text-grey-5" style="margin-left: 2.6em;">$7000</p>
+                                <p class="font-l text-grey-5" style="margin-left: 2.6em;">Free</p>
                                </div>
                                <hr>
                                <div class="d-inline-flex">
-                                <p class="mb-5 fw-500">Total Amount</p>
-                                <p class="mb-5 fw-500" style="margin-left: 4.4em;">$7000</p>
+                                <p class="mb-5 fw-500" style="font-weight:900;color:black">Total Amount</p>
+                                <p class="mb-5 fw-500" onclick="" style="margin-left: 4.4em;font-weight:900;color:black">₹ {{Total}}</p>
                                </div>
                                 <hr>
                                 <br>
-                                <button type="button" class="btn btn-success" style="padding-inline: 5em;">PLACE ORDER</button>
+                                <a href="/check-payment">
+
+                                    <button type="button" class="btn btn-success" style="padding-inline: 5em; text-align:center;background-color:rgb(7, 127, 151)">PLACE ORDER</button>
+                                </a>
+                                
                                 <br>
                                 <br>
                                 <p style="text-align: center;">or</p>
                                 <br>
-                                <button type="button" class="btn btn-info" style="padding-inline: 4em; background-color:rgb(0, 0, 0);color:rgb(255, 255, 255)">Continue shopping</button>
+                                <a href="/">
+                                    <button type="button" class="btn btn-info" style="padding-inline: 4em; background-color:rgb(0, 0, 0);color:rgb(255, 255, 255)">Continue shopping</button>
+                                </a>
+                                
                             </div>
                         </div>
                     </div>
@@ -105,3 +121,7 @@ function myFunction() {
   }
 }
 </script> --}}
+
+
+
+

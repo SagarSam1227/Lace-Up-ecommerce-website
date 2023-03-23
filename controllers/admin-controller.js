@@ -16,7 +16,7 @@ module.exports = {
   listProducts: (req, res) => {
     productHelper.findProduct().then((result) => {
       const data = JSON.parse(JSON.stringify(result));
-      res.render("admin/list-product", { admin: true, data });
+      res.render("admin/list-product", { admin: true, data});
     });
   },
   get_addProduct: (req, res) => {
@@ -40,7 +40,7 @@ module.exports = {
     productHelper.findProduct().then((result) => {
       const data = JSON.parse(JSON.stringify(result));
       if (session) {
-        res.render("user/home", { user: true, data });
+        res.render("user/home", { user: req.session.email, data ,count:req.session.count});
       } else {
           res.render("user/home", { data });
         }
@@ -50,7 +50,7 @@ module.exports = {
   usersList: (req, res) => {
     userHelper.finding().then((result) => {
       const data = JSON.parse(JSON.stringify(result));
-      res.render("admin/list-users", { admin: true, data });
+      res.render("admin/list-users", { admin: true, data});
     });
   },
   userBlock: (req, res, next) => {

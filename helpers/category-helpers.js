@@ -1,31 +1,29 @@
-
 const Category = require("../models/category-model");
-const Product = require('../models/product-model')
+const Product = require("../models/product-model");
 
-module.exports={
+module.exports = {
+  saveCategory: (data) => {
+    return new Promise(async (resolve, reject) => {
+      let categoryDetails = new Category({
+        category: data.category,
+        sub: data.subcategory,
+        description: data.description,
+      });
+      categoryDetails.save();
+      resolve(categoryDetails);
+    });
+  },
 
-    saveCategory: (data) => {
-        return new Promise(async (resolve, reject) => {
-          let categoryDetails = new Category({
-            category: data.category,
-            sub: data.subcategory,
-            description: data.description,
-          });
-          categoryDetails.save();
-          resolve(categoryDetails);
-        });
-      },
-    
-      findCategoryUser: (cat) => {
-        return new Promise(async (resolve, reject) => {
-          let categoryFind = await Product.find({ category: cat });
-          resolve(categoryFind);
-        });
-      },
-      findCategoryAdmin: () => {
-        return new Promise(async (resolve, reject) => {
-          let categoryFind = await Category.find();
-          resolve(categoryFind);
-        });
-      },
-}
+  findCategoryUser: (cat) => {
+    return new Promise(async (resolve, reject) => {
+      let categoryFind = await Product.find({ category: cat });
+      resolve(categoryFind);
+    });
+  },
+  findCategoryAdmin: () => {
+    return new Promise(async (resolve, reject) => {
+      let categoryFind = await Category.find();
+      resolve(categoryFind);
+    });
+  },
+};

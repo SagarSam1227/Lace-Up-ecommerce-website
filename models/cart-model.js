@@ -1,12 +1,11 @@
 const { ObjectId } = require("mongodb");
 var mongoose = require("mongoose");
-const product = require('../models/product-model')
 
 const Schema = mongoose.Schema;
 
 const cartSchema = new Schema({
-  userId:{
-    type:String
+  userId: {
+    type: String,
   },
   product: [
     {
@@ -15,13 +14,13 @@ const cartSchema = new Schema({
         ref: "product",
       },
       count: {
-        type: Number
+        type: Number,
       },
       subTotal: {
-        type: Number
-      }
-    }
-  ]
+        type: Number,
+      },
+    },
+  ],
 });
 
 const cart = mongoose.model("cart", cartSchema);

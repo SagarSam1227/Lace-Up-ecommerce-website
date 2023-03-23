@@ -3,10 +3,10 @@ var express = require("express");
 var router = express.Router();
 const userSession = require("../sessions/user-session");
 const userController = require("../controllers/user-controller");
-const categoryController = require('../controllers/category-controller')
-const cartController =require('../controllers/cart-controller')
+const categoryController = require("../controllers/category-controller");
+const cartController = require("../controllers/cart-controller");
 
-router.get("/",userController.userHome)
+router.get("/", userController.userHome);
 
 router
   .route("/login")
@@ -34,12 +34,30 @@ router.get("/product/:id", userController.each_Product_Details);
 
 router.get("/category-collection/:id", categoryController.categoryDisplay);
 
-
-   
 // cart--------------
 
-router.get('/cart',userSession.userLogout,cartController.getCart)
+router.get("/cart", userSession.userLogout, cartController.getCart);
 
-router.get('/cart/:id',cartController.addTocart)
+router.get("/cart/:id", cartController.addTocart);
+
+router.post(
+  "/delete-cart-Product",
+  userSession.userLogout,
+  cartController.deleteCartproduct
+);
+
+router.post("/minus-count/:id", cartController.updateminusCount);
+
+router.post("/plus-count/:id", cartController.updateplusCount);
+
+router.get("/check-payment", (req, res) => {
+  res.render("user/check-payment", { user: true });
+});
+
+// account-------------
+
+router.get('/user-account',userSession.userLogout,userController.getAccountPage)
+
+
 
 module.exports = router;

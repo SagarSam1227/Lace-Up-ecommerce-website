@@ -1,7 +1,6 @@
 var db = require("../config/connection");
 var bcrypt = require("bcrypt");
 const users = require("../models/user-model");
-const User = require("../models/user-model");
 
 module.exports = {
   finding: () => {
@@ -34,14 +33,14 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       let finduser = await users.findOne({ contact: mobile });
       resolve(finduser);
+    }); 
+  },
+ 
+  findUser: (email) => {
+    return new Promise(async (resolve, reject) => {
+      const User = await users.findOne({ email: email });
+      console.log(User);
+      resolve(User);
     });
   },
-
-  findUser:(email)=>{
-    return new Promise(async (resolve, reject)=>{
-      const User= await users.findOne({email:email})
-      console.log(User);
-      resolve(User)
-    })
-  }
 };

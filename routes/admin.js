@@ -68,4 +68,4 @@ router.get("/subctegory-list", categoryController.listCategory);
 
 router.get("/logout", adminSession.adminCheck, adminSession.sessionDestroy);
 
-module.exports = router;  
+module.exports = router;
