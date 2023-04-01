@@ -14,7 +14,7 @@ const userSchema = new Schema({
   },
   contact: {
     type: String,
-    required: true,
+    required: true, 
   },
   password: {
     type: String,
@@ -24,6 +24,18 @@ const userSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  address:[{
+    id:String,
+    name:String,
+    contact:String,
+    pincode:String,
+    locality:String,
+    address:String,
+    city:String,
+    state:String,
+    landmark:String,
+    contact2:String
+  }]
 });
 
 userSchema.pre("save", async function (next) {

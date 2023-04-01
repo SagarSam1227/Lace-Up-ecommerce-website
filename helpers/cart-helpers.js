@@ -32,7 +32,6 @@ module.exports = {
         { userId: userID },
         { $push: { product: productObj } }
       );
-      console.log("status is  ", status);
       resolve(status);
     });
   },
@@ -50,7 +49,8 @@ module.exports = {
           $project: {
             item: "$product.productId",
             quantity: "$product.count",
-            subTotal: "$product.subTotal",
+            subTotal: "$product.subTotal"
+            
           },
         },
         {
@@ -70,7 +70,6 @@ module.exports = {
           },
         },
       ]);
-      console.log("priyesh in vendii", cartDetails);
       resolve(cartDetails);
     });
   },
@@ -87,40 +86,32 @@ module.exports = {
   },
 
   removeCartProduct: (userId, proId) => {
-    console.log(ObjectId(userId));
 
     return new Promise(async (resolve, reject) => {
       const status = await cart.updateOne(
         { _id: ObjectId(userId) },
         { $pull: { product: { productId: ObjectId(proId) } } }
       );
-      console.log("aromallll", status);
       resolve(true);
     });
   },
 
   updatePositive: (email, proId) => {
-    console.log(email);
-    console.log(ObjectId(proId));
     return new Promise(async (resolve, reject) => {
       const status = await cart.updateOne(
         { userId: email, "product.productId": ObjectId(proId) },
         { $inc: { "product.$.count": 1 } }
       );
-      console.log("status is :", status);
       resolve(status);
     });
   },
 
   updateNegative: (email, proId) => {
-    console.log(email);
-    console.log(ObjectId(proId));
     return new Promise(async (resolve, reject) => {
       const status = await cart.updateOne(
         { userId: email, "product.productId": ObjectId(proId) },
         { $inc: { "product.$.count": -1 } }
       );
-      console.log("status is :", status);
       resolve(status);
     });
   },
@@ -131,10 +122,20 @@ module.exports = {
         { userId: email, "product.productId": ObjectId(proId) },
         { $set: { "product.$.subTotal": updatedSubTotal } }
       );
-      console.log("status is :", status);
       resolve(status);
     });
   },
+  removeCart:(email)=>{
+    return new Promise(async(resolve,reject)=>{
+        const status = await cart.updateOne(
+          { userId:email},{
+
+            $set:{product:[]}
+          }
+        );
+        resolve(true);
+      });
+  }
 };
 
 // function Cart(user,product){

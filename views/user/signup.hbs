@@ -32,13 +32,25 @@
                                             <div class="form-group">
                                                 <label class="float-left">Password</label>
                                                 <input id="password" type="password" name="password" placeholder="Password" onkeyup="ValidPassword()">
-                                                <span id="password-error" style="float: right; color:crimson"></span>
+                                                <span id="password-err" style="float: right; color:crimson"></span>
+                                                
+                                               
                                             </div>
                                             <div class="form-group">
                                                 <label class="float-left">Confirm Password</label>
                                                 <input id="password2" type="password" name="password2" placeholder="Confirm password" onkeyup="confirmPassword()">
                                                 <span id="password-confirm" style="float: right; color:crimson"></span>
                                             </div>
+
+
+                                            
+
+                                            <p id="password-no-err" style="color:#00808d;font-size: 0.8em;">Passwords must have at least one digit!</p>
+                                            <p id="password-small-err"  style="color:#00808d;font-size: 0.8em;">Passwords must have at least one lowercase!</p>
+                                            <p id="password-capital-err"  style="color:#00808d;font-size: 0.8em;">Passwords must have at least one uppercase!</p>
+                                            <p id="password-special-err"  style="color:#00808d;font-size: 0.8em;">Passwords must have at least one special character!</p>
+                                           <p id="password-length-err"  style="color:#00808d;font-size: 0.8em;">Passwords must have at least 6 characters!</p>
+                                    
 
                                             {{!-- <div class="login_footer form-group">
                                                 <div class="chek-form">
@@ -202,13 +214,20 @@
 var nameError=document.getElementById('name-error');
 var contactError=document.getElementById('phone-error');
 var mailError=document.getElementById('mail-error');
-var passwordError= document.getElementById('password-error')
+
+var passwordErr = document.getElementById('password-err')
+var passwordnoErr= document.getElementById('password-no-err')
+var passwordcapitalErr= document.getElementById('password-capital-err')
+var passwordsmallErr= document.getElementById('password-small-err')
+var passwordspecialErr= document.getElementById('password-special-err')
+var passwordlengthErr = document.getElementById('password-length-err')
+
 var password2Error= document.getElementById('password-confirm')
 var submitError=document.getElementById('submit-error');
 
 
-function ValidName(){
-    var name=document.getElementById('username').value;
+    function ValidName(){
+    var name=document.getElementById('username').value
     
     if(name.length==0){
          nameError.innerHTML= 'Name is required!';
@@ -222,7 +241,8 @@ function ValidName(){
     nameError.innerHTML= '';
     return true;
 
-}
+    }
+
     function ValidEmail(){
         var mail=document.getElementById('email').value;
 
@@ -252,6 +272,7 @@ function ValidName(){
             contactError.innerHTML='please enter valid number';
             return false;
         }
+    
         contactError.innerHTML='';
         return true
 
@@ -263,16 +284,46 @@ function ValidName(){
         var password = document.getElementById('password').value;
 
         if(password.length==0){
-            passwordError.innerHTML='Password requied!'
+            passwordErr.innerHTML='Password requied!'
             return false
+        }else{
+             passwordErr.innerHTML='';
+    
         }
 
-        if(password.length<3){
-            passwordError.innerHTML='more than 2 characters'
-            return false 
+const lowermsg='Passwords must have at least one lowercase!'
+const uppermsg='Passwords must have at least one uppercase!'
+const numbermsg='Passwords must have at least one digit!'
+const specialmsg='Passwords must have at least one special character!'
+const lengthmsg= 'Passwords must have at least 6 characters!'
+
+const lowercase = /^(?=.*[a-z]).+$/
+const uppercase=  /^(?=.*[A-Z]).+$/
+const number= /\d/
+const specialchr=/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
+const length= /^.{6,}$/
+
+check(number,passwordnoErr,numbermsg)
+check(lowercase,passwordsmallErr,lowermsg)
+check(uppercase,passwordcapitalErr,uppermsg)
+check(specialchr,passwordspecialErr,specialmsg)
+check(length,passwordlengthErr,lengthmsg)
+
+
+
+function check(regex,ERROR,MESSAGE){
+const status = regex.test(password)
+        if(status==false){
+            ERROR.innerHTML=MESSAGE
+            return false
+        }else{
+             ERROR.innerHTML='';
         }
-        passwordError.innerHTML='';
+    }
         return true
+      if(password.length<6){
+        
+      } 
     }
 
     function confirmPassword(){

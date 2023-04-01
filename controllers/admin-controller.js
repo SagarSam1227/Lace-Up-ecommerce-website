@@ -1,9 +1,11 @@
 const { json } = require("express");
 const session = require("express-session");
 const { response, render } = require("../app");
-var productHelper = require("../helpers/product-helpers");
+const productHelper = require("../helpers/product-helpers");
 const userHelper = require("../helpers/user-helpers");
 const userController = require("./user-controller");
+const ALERTS = require("../config/enums");
+const orderHelper = require("../helpers/order-helpers");
 
 module.exports = {
   Admin_LoginPage: (req, res) => {
@@ -16,41 +18,77 @@ module.exports = {
   listProducts: (req, res) => {
     productHelper.findProduct().then((result) => {
       const data = JSON.parse(JSON.stringify(result));
-      res.render("admin/list-product", { admin: true, data});
+      res.render("admin/list-product", { admin: true, data });
     });
   },
   get_addProduct: (req, res) => {
-    res.render("admin/add-product", { admin: true });
+    res.render("admin/add-product", { admin: true,proExist:req.session.proExist,vdoErr:req.session.vdoErr}); 
+    req.session.proExist=false
+    req.session.vdoErr=false
   },
 
-  add_Product: (req, res) => {
-    productHelper
-      .AddProduct(req.body, req.file.filename)
-      .then(res.redirect("/admin/add-product"));
+  add_Product: async(req, res) => {
+    const proName = req.body.name
+    const proImage = req.file.filename
+    console.log(req.body);
+    if(proImage.match('mp4')){
+      req.session.vdoErr=ALERTS.VDO_ERR
+      res.redirect("/admin/add-product")
+    }else{
+
+      console.log(req.body);
+      const status = await productHelper.productExisting(proName,proImage)
+      if(status){
+        req.session.proExist=ALERTS.PRO_EXIST
+        res.redirect("/admin/add-product")
+      }else{
+        await productHelper
+        .AddProduct(req.body, req.file.filename)
+        .then(res.redirect("/admin/add-product"));
+      }
+
+    }
   },
 
-  deleteProduct: (req, res) => {
+  listFalse: async (req, res) => {
+    console.log('okkkkk');
     let prdctId = req.params.id;
-    productHelper
-      .productDelete(prdctId)
-      .then(res.redirect("/admin/list-products"));
+    await productHelper
+      .listUpdate(prdctId,false)
+      .then(
+        res.redirect("/admin/list-products")
+      )
   },
 
-  displayProducts: (req, res, session) => {
-    productHelper.findProduct().then((result) => {
-      const data = JSON.parse(JSON.stringify(result));
-      if (session) {
-        res.render("user/home", { user: req.session.email, data ,count:req.session.count});
-      } else {
-          res.render("user/home", { data });
-        }
-      })
-  }, 
+  listTrue:async(req,res)=>{
+    let prdctId = req.params.id;
+    await productHelper
+      .listUpdate(prdctId,true)
+      .then(
+        res.redirect("/admin/list-products")
+      )
+  },
 
+  displayProducts: async(req, res, Session) => {
+  await productHelper.findProduct().then((result) => {
+      const data = JSON.parse(JSON.stringify(result));
+      if (Session) {
+        res.render("user/home", {
+          user: req.session.email,
+          data,
+          count: req.session.count,
+        });
+      } else {
+        res.render("user/home", { data });
+      }
+    }); 
+  },
+ 
   usersList: (req, res) => {
     userHelper.finding().then((result) => {
       const data = JSON.parse(JSON.stringify(result));
-      res.render("admin/list-users", { admin: true, data});
+    
+      res.render("admin/list-users", { admin: true, data });
     });
   },
   userBlock: (req, res, next) => {
@@ -75,13 +113,20 @@ module.exports = {
       res.render("admin/update-products", { admin: true, data });
     });
   },
-  updateProduct: (req, res) => {
+  updateProduct:(req, res) => {
     let id = req.params.id;
     let data = req.body;
-    let filename = req.file.filename;
-    productHelper
-      .productEdit(id, data, filename)
-      .then(res.redirect("/admin/list-products"));
+    if(req.file==undefined){
+      productHelper
+        .productEdit(id, data)
+        .then(res.redirect("/admin/list-products"));
+    }else{
+      let filename = req.file.filename;
+      productHelper
+        .productEdit(id, data, filename)
+        .then(res.redirect("/admin/list-products"));
+    }
   },
 
+  
 };

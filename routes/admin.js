@@ -7,6 +7,7 @@ var adminController = require("../controllers/admin-controller");
 const Product = require("../models/product-model");
 var multerFile = require("../config/multer");
 const categoryController = require("../controllers/category-controller");
+const orderController = require("../controllers/order-controller")
 
 router.get("/", adminSession.adminLogin, adminController.Admin_LoginPage);
 
@@ -45,9 +46,14 @@ router.get(
 );
 
 router.get(
-  "/delete-product/:id",
+  "/list-false-product/:id",
   adminSession.adminCheck,
-  adminController.deleteProduct
+  adminController.listFalse
+);
+
+router.get("/list-true-product/:id",
+adminSession.adminCheck,
+adminController.listTrue
 );
 
 router.get(
@@ -62,10 +68,17 @@ router.get(
   adminController.userRedirect
 );
 
+
 router.get("/list-users", adminSession.adminCheck, adminController.usersList);
 
 router.get("/subctegory-list", categoryController.listCategory);
 
+router.get('/list-orders',adminSession.adminCheck,orderController.orderList)
+
+router.get("/order-details-admin/:id",adminSession.adminCheck,orderController.orderView)
+
 router.get("/logout", adminSession.adminCheck, adminSession.sessionDestroy);
+
+router.post('/change-status',orderController.changeStatus)
 
 module.exports = router;

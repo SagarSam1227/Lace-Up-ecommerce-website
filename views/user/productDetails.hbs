@@ -115,8 +115,13 @@
                                    
                                     </div>
                                             <button type="button"  style="border-radius: unset;color: #ffffffc7;background: #0e4764;padding-inline: 8.2em;" class="btn btn-outline-info">
-                                                <a onclick="updateNumber('{{data._id}}')" aria-label="Add To Cart" class=" hover-up"  style="color: rgb(255, 255, 255);">ADD TO CART</a>
-                                                
+                                                {{#if user}}
+                                                <a onclick="updateNumber('{{data._id}}')" id="mybtn" aria-label="Add  To Cart" class=" hover-up"  style="color: rgb(255, 255, 255);">ADD TO CART</a>
+                                                {{else}}
+                                                  <a href="/login" aria-label="Add To Cart" class=" hover-up"   style="color: rgb(255, 255, 255);">ADD TO CART</a>
+                                          {{/if}}
+
+                                          
                                             </button>
                                             <button type="button" style="border-radius: unset;color:turquoise;background: #000000;padding-inline: 7.3em; margin-top:2em" class="btn btn-outline-info">
                                                  <a aria-label="Add To Cart" class=" hover-up" href="/cart/{{_id}}" style="color: bisque;">ADD TO WISHLIST</a>
@@ -134,6 +139,16 @@
                                     </div>
                                     <!-- Detail Info -->
                                 </div>
+
+
+                                <div class="toast">
+    <div class="toast-header">
+      Toast Header
+    </div>
+    <div class="toast-body">
+      Some text inside the toast body
+    </div>
+  </div> 
                             </div>
                             {{!-- <div class="tab-style3">
                                 <ul class="nav nav-tabs text-uppercase">
@@ -746,4 +761,5 @@
 
   }, false);
 }();
+
 </script>

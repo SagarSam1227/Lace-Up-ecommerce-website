@@ -20,11 +20,17 @@
     <input type="value" name="newPrice" class="form-control" id="formGroupExampleInput2" value="{{data.newPrice}}">
   </div>
 <div class="form-row">
-  <div class="form-group col-md-6" style="width: 25em;">
+  <div class="form-group col-md-3" style="width: 25.4em;">
     <label for="formGroupExampleInput2">old-price</label>
     <input type="value" name="oldPrice" class="form-control" id="formGroupExampleInput2" value="{{data.oldPrice}}">
   </div>
 </div>
+<div class="form-group col-md-3" style="width: 25.4em;">
+    <label for="formGroupExampleInput2">Stock</label>
+    <input type="value" name="stock" class="form-control" id="formGroupExampleInput2" value="{{data.stock}}">
+  </div>
+</div>
+
 </div>
   <div class="form-group col-md-6" style="width: 15em;margin-left: 30em;margin-top: -6.4em;">
     <label for="formGroupExampleInput2">Image</label>
@@ -50,5 +56,16 @@ style=";
     <script>
       function viewImage(event){
         document.getElementById('imageView').src=URL.createObjectURL(event.target.files[0])
+      }
+
+
+      function validPrice(priceId){
+        const price = document.getElementById(priceId).value
+
+        if(price<=0){
+          document.getElementById(priceId).style.borderColor='red'
+        }
+        ducument.getElementById(priceId).style.borderColor='none'
+        return false
       }
     </script>

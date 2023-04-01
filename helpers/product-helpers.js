@@ -14,6 +14,8 @@ module.exports = {
         oldPrice: product.oldPrice,
         rating: product.rating,
         Image: filename,
+        stock: +product.stock,
+        list: true,
       });
       productDetails.save();
       resolve(productDetails);
@@ -30,22 +32,30 @@ module.exports = {
       id(data._id);
     });
   },
-  productDelete: (id) => {
-    return new Promise(async (resove, reject) => {
-      await Products.deleteOne({ _id: id });
+  listUpdate: (id,state) => {
+    return new Promise(async (resolve, reject) => {
+    const data=  await Products.updateOne(
+        { _id:id},
+        {
+          list:state
+        }
+      );
+      console.log('data iss ',data);
+      resolve()
     });
   },
   productEdit: (id, data, filename) => {
     return new Promise(async (resolve, reject) => {
       await Products.updateOne(
         { _id: id },
-        {
+        { 
           name: data.name,
           category: data.category,
           newPrice: data.newPrice,
           oldPrice: data.oldPrice,
           rating: data.rating,
           Image: filename,
+          stock:data.stock
         }
       );
       resolve();
@@ -62,6 +72,26 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       let userFind = await User.findOne({ email: username });
       resolve(userFind);
+    });
+  },
+
+  productExisting: (name, Image) => {
+    return new Promise(async (resolve, reject) => {
+      let status = await Products.find({
+        $or: [{ name: name }, { Image: Image }],
+      });
+      console.log(status);
+      if (status.length == 0) {
+        resolve(false);
+      } else {
+        resolve(true);
+      }
+    });
+  },
+
+  stockUpdate: (id, count) => {
+    return new Promise(async (resolve, reject) => {
+      await Products.updateOne({ _id: id }, { $inc: { stock: -count } });
     });
   },
 };

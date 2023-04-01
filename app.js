@@ -10,11 +10,28 @@ var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
 var dbConnect = require('./config/connection')
 var bodyParser =require('body-parser')
-
+const Handlebars = require('handlebars');
+var cors = require('cors')
 // require('dotenv').config({path:'../.env'});
 require('dotenv').config()
 
 var app = express();
+
+app.use(cors())
+Handlebars.registerHelper('ifEquals',(str)=>{
+  console.log('handlebarrr called');
+  if(str=='Delivered')return 'Return ?'
+  return 'Cancel ?'
+})
+
+Handlebars.registerHelper('ifChecking', function(str, options) {
+  return (str != 'Returned' && str!= 'Cancelled') ? options.fn(this) : options.inverse(this);
+});
+
+
+
+
+
 
 
 // view engine setup
@@ -27,9 +44,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret:'Key',cookie:{maxAge:6000000}}))
+app.use(session({secret:'Key',
+resave:false,
+saveUninitialized:false,
+cookie:{maxAge:6000000}}))
 app.use(nocache())
 dbConnect();
+
+
 
 
 // app.use('/twilio-sms',twilioRouter)

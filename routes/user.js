@@ -5,6 +5,7 @@ const userSession = require("../sessions/user-session");
 const userController = require("../controllers/user-controller");
 const categoryController = require("../controllers/category-controller");
 const cartController = require("../controllers/cart-controller");
+const orderController = require ("../controllers/order-controller")
 
 router.get("/", userController.userHome);
 
@@ -45,19 +46,47 @@ router.post(
   userSession.userLogout,
   cartController.deleteCartproduct
 );
-
+     
 router.post("/minus-count/:id", cartController.updateminusCount);
 
 router.post("/plus-count/:id", cartController.updateplusCount);
 
-router.get("/check-payment", (req, res) => {
-  res.render("user/check-payment", { user: true });
-});
+router.get(
+  "/check-payment",
+  userSession.userLogout,
+  userSession.orderPlaced,
+  cartController.getProceedTocheckPage
+);
+
+router.post("/newpayment-address", userController.addAddressInpayment);
 
 // account-------------
 
-router.get('/user-account',userSession.userLogout,userController.getAccountPage)
+router.get(
+  "/user-account",
+  userSession.userLogout,
+  userController.getAccountPage 
+);
 
+router.post("/update-user", userSession.userLogout, userController.updateUser);
 
+//address----------------
+
+router.post("/add-address", userSession.userLogout, userController.addAddress);
+
+router.get('/delete-address/:id',userSession.userLogout,userController.deleteAddress)
+
+//Place order---------------
+
+router.get('/get-orders',userSession.userLogout,orderController.getOrder)
+
+router.post("/place-order",userSession.userLogout,userSession.orderPlaced,orderController.placeOrder);
+
+router.get('/order-details/:id',userSession.userLogout,orderController.orderView)
+
+router.get('/success',orderController.renderSuccess)
+
+router.post('/verify-payment',orderController.verifyPayment)
+ 
 
 module.exports = router;

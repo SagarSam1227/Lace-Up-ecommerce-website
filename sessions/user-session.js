@@ -21,9 +21,23 @@ module.exports = {
 
   userLogout: (req, res, next) => {
     if (req.session.email) {
-      next();
+      next(); 
     } else {
       res.redirect("/");
     }
   },
+  orderPlaced:(req,res,next)=>{
+    if(req.session.order){
+      next()
+    }else{
+      res.redirect('/')
+    }
+  },
+  // orderFalse:(req,res,next)=>{
+  //   if(req.session.order){
+  //     res.redirect('/')
+  //   }else{
+  //     next()
+  //   }
+  // }
 };

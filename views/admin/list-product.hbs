@@ -16,7 +16,7 @@
       {{!-- <th scope="col">prize</th> --}}
       <th scope="col">image</th>
       <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
+      <th scope="col" style="width: 8em;">Status</th>
       
     </tr>
   </thead>
@@ -32,30 +32,49 @@
       <td>{{newPrice}}</td>
       <td><img style="height: 50px; width:50px" src="/uploads/{{Image}}" alt=""></td>
     <td><a class="" href="/admin/edit-product/{{_id}}"><img src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Compose-512.png" style="height: 2em;width:2em" alt=""></a></td>
-      <td><a class="" onclick="return confirm('Do you want to delete {{this.name}}')" href="/admin/delete-product/{{_id}}" ><img src="https://cdn-icons-png.flaticon.com/512/1345/1345874.png" style="height: 2em;width:2em"  alt=""></a></td>
-
+    {{#if list}}
+      <td>
+        <a href="/admin/list-false-product/{{_id}}">
+        <button class="" style="border-radius: 0em;width: 5em;border: none;background: #000000d1;color:#ffff" onclick="return confirm('Do you want to unlist {{this.name}}')" >unlist</button>
+        </a></td>
+      {{else}}
+      <td>
+        <a href="/admin/list-true-product/{{_id}}">
+        <button class="" style="border-radius: 0em;width: 5em;border: none;background: #d1e7dd; color:#0f5132"  >list</button>
+        </a></td>
+      {{/if}}
     </tr>
 
     {{/each}}
     {{else}}
-    <div class="container text-center"><a href="/admin/add-product">
-      <img src="https://img.freepik.com/free-icon/add-button_318-757580.jpg?size=338&ext=jpg&ga=GA1.2.1909228246.1667835325&semt=ais" alt="ee" style="height:13em; width:13em;margin-top: 9em;">
-    </a>
-    
-    <h3 style="margin-top:1em">add products</h3>
-</div>
+    <div id="content" class="col-sm-12" style="text-align:center;">
+<style>
+    .error_img{
+    display: block;
+    text-align: center;
+    width: 16em;
+    margin-inline: 36em;
+    padding-top: 3em;
+    }
+    .btn.btn-mega{
+    text-align: center;
+    border: 1px solid #fff;
+    background: #fff;
+    padding: 10px 30px;
+    border-radius: 50px;
+    box-shadow: 0 0 9px 1px #eaeaea;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: 'Celiasbold';
+    background: black;
+    }
+                        </style>
+                        <img src="https://cdn-icons-png.flaticon.com/512/7486/7486747.png" class="error_img" >
+                        <h2 style="font-family: 'Celiasbold';font-size: 18px;color: #000;">No products</h2>
+                        <p style="margin-bottom: 2%;font-size: 14px;font-family: 'Celias';">Looks like you haven't added <br> any products yet </p>   
+                        <a href="/" class="btn btn-mega" style="">Add Product</a>
+                     </div>
 {{/if}}
-    {{!-- <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr> --}}
   </tbody>
 </table>
     </div>

@@ -26,6 +26,14 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
+  stock:{
+    type: Number,
+    required: true,
+  },
+  list:{
+    type: Boolean,
+    required: true
+  }
 });
 
 const Product = mongoose.model("Product", productSchema);

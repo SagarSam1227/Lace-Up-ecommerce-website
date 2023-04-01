@@ -1,0 +1,87 @@
+
+<div class="container main">
+    {{#if data}}
+    <table class="table" >
+  <thead class="thead-dark">
+    <tr class="d-flex flex-row" style="background: #f4f0ec;">
+      <th scope="col" style="width:15em">Order No.</th>
+      <th scope="col" style="width:15em">Date</th>
+      <th scope="col" style="width:10em">Status</th>
+      <th scope="col" style="width:10em">Total</th>
+      <th scope="col" style="width:10em">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each data}}
+    <tr class="d-flex flex-row">
+      <td class="items" style="width:15em">{{_id}}</td>
+      <td class="items" style="width:15em">{{orderDate}}</td>
+      <td class="items" style="width:10em">{{status}}</td>
+      <td class="items" style="width:10em">₹ {{Total}}</td>
+      <td class="items" style="width:10em"><a href="/order-details/{{_id}}">View</a></td>
+    </tr>
+    {{/each}}
+    {{else}}
+    <div id="content" class="col-sm-12" style="text-align:center;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/7486/7486747.png" class="error_img" >
+                        <h2 style="font-family: 'Celiasbold';font-size: 18px;color: #000;">No More Orders</h2>
+                        <p style="margin-bottom: 2%;font-size: 14px;font-family: 'Celias';">Looks like you haven't added <br> anything to your cart yet </p>   
+                        <a href="/" class="btn btn-mega" style="">Start Shopping</a>
+</div>
+
+  </tbody>
+</table>
+    {{/if}}
+</div>
+
+
+
+<style>
+.container.main{
+        margin-top: 6em;
+       
+}
+tr{
+           position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid transparent;
+        border-radius: .25rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+}
+.table{
+    width: 60em;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+.items{
+    padding-inline: 1em;
+}
+
+.error_img{
+    display: block;
+    width: 16em;
+    margin-inline: 36em;
+    margin-left: auto;
+    margin-right: auto;
+    }
+    .btn.btn-mega{
+    text-align: center;
+    border: 1px solid #fff;
+    background: #fff;
+    padding: 10px 30px;
+    border-radius: 50px;
+    box-shadow: 0 0 9px 1px #eaeaea;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: 'Celiasbold';
+    background: black;
+    }
+
+</style>

@@ -955,6 +955,7 @@
                         <div class="row product-grid-4">
                         {{#if data}}
                         {{#each data}}
+                        {{#if list}}
                             <div class="col-lg-3 col-md-4 col-12 col-sm-6">
                                 <div class="product-cart-wrap mb-30">
                                     <div class="product-img-action-wrap">
@@ -984,8 +985,8 @@
                                             </span>
                                         </div>
                                         <div class="product-price">
-                                            <span>${{newPrice}}</span>
-                                            <span class="old-price">${{oldPrice}}</span>
+                                            <span>₹ {{newPrice}}</span>
+                                            <span class="old-price">₹ {{oldPrice}}</span>
                                         </div>
                                         {{!-- <div class="product-action-1 show">
                                             <a aria-label="Add To Cart" class="action-btn hover-up" href="/cart/{{_id}}"><i class="fi-rs-shopping-bag-add"></i></a>
@@ -993,6 +994,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{/if}}
 
                             {{/each}}
                             {{else}}

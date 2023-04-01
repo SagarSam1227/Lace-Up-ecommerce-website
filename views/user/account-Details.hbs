@@ -8,7 +8,7 @@
                             <img src="https://cdn-icons-png.flaticon.com/512/219/219970.png" alt="Admin"
                                 class="rounded-circle p-1 bg-info" width="110">
                             <div class="mt-3">
-                                <h4>John Doe</h4>
+                                <h4>{{data.name}}</h4>
 
                             </div>
                         </div>
@@ -16,7 +16,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list d-flex justify-content-between align-items-center flex-wrap"
                                 style="font-size: 1.2em;text-align: center;padding-left: 4em;">
-                                <a href="">Orders</a>
+                                <a href="/get-orders">Orders</a>
                             </li>
                             <br>
                             <li class="list d-flex justify-content-between align-items-center flex-wrap"
@@ -43,20 +43,29 @@
             <div class="col-lg-8">
                 <div class="card" style="width: 37em; margin-left: 3em;">
                     <div class="card-body" style="padding: 3em;">
+                            <form id="form" action="/update-user" method="post">
                         <div class="row mb-3">
                             <div class="col-sm-3" style="padding-top: 1em;">
                                 <h6 class="mb-0">Full Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="John Doe">
+                                <input type="text" name="name" class="form-control" value="{{data.name}}">
                             </div>
                         </div>
+                         {{#if exist}}
+                            <div class="alert alert-warning" role="alert">
+
+                            <a href="" style="margin-left: 1em;">{{exist}}</a>
+                            <img src="https://cdn-icons-png.flaticon.com/512/3756/3756730.png" style="height: 1.5em; width: 1.5em; margin-bottom: -0.3em;" alt="">
+                            </div>
+                            {{/if}}
                         <div class="row mb-3">
                             <div class="col-sm-3" style="padding-top: 1em;">
                                 <h6 class="mb-0">Email</h6>
                             </div>
+                            
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="john@example.com">
+                                <input name="email" type="text" class="form-control" value="{{data.email}}">
                             </div>
                         </div>
 
@@ -65,33 +74,37 @@
                                 <h6 class="mb-0">Mobile</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="(320) 380-4539">
+                                <input name="phone" type="text" class="form-control" value="{{data.contact}}">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-9 text-secondary" style="margin-top: 2.5em;">
-                                <input type="button" class="btn btn-primary px-4" style="background: #337180;"
-                                    value="Save Changes">
+                               <button type="submit" class="btn btn-primary px-4" style="background: #337180;height: 3em;width: 21em;">Save changes</button>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
                 <br>
                 <h4 style="padding-left: 3.9em;">Address</h4>
                 <div class="row">
                     <div class="col-sm-12 pt-3" style="width: 41.8em; padding-left: 3.9em; ">
+                        {{#each addressList}}
                         <div class="card">
                             <div class="card-body">
-                                <h5>Address : Thrikkamattathil (H)</h5>
-                                <h5>Peruva P O</h5>
-                                <h5>PERUVA</h5>
-                                <h5>Kottayam</h5>
-                                <h5>Kerala</h5>
-                                <h5>686610</h5>
+                                <a href="/delete-address/{{id}}">
+
+                                <img src="https://cdn-icons-png.flaticon.com/512/2723/2723639.png" alt="" style="    height: 2em;float: right;">
+                                </a>
+                                <h5 class="pt-2">{{name}}</h5>
+                                <h5 class="pt-2">{{contact}}</h5>
+                                <h5 class="pt-2">{{address}}, {{locality}}</h5>
+                                <h5 class="pt-2">{{city}}, {{state}} - {{pincode}}</h5>
                             </div>
                         </div>
+                        {{/each}}
                     </div>
                 </div>
 
@@ -110,45 +123,43 @@
                             </div>
                             <div class="modal-body">
 
-                                <form method="post">
+                                <form method="post" action="/add-address">
                                     <div class="form-group" style="float:left; width: 15.5em;">
-                                        <input type="text" required="" name="fname" placeholder="First name *">
+                                        <input type="text"  required="" id="address-name" onkeyup="validateName()" name="name" placeholder="Name *">
                                     </div>
                                     <div class="form-group" style="float: right; width: 15.5em;">
-                                        <input type="text" required="" name="lname" placeholder="Mobile number *">
+                                        <input type="text" required="" id="address-no" onkeyup="validateNo()"  name="contact" placeholder="Mobile number *">
                                     </div>
                                     <div class="form-group" style="float:left; width: 15.5em;">
-                                        <input required="" type="text" name="pincode" placeholder="Pincode *">
+                                        <input required="" type="text" id="address-pincode" onkeyup="validatePincode()" name="pincode" placeholder="Pincode *">
                                     </div>
                                     <div class="form-group" style="float: right; width: 15.5em;">
-                                        <input required="" type="text" name="locality" placeholder="Locality *">
+                                        <input required="" type="text" name="locality" id="address-locality" onkeyup="validateLocality()"  placeholder="Locality *">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" required="" placeholder="Address *">
+                                        <input type="text"  required="" name="address" id="address-address" onkeyup="validateAddress()" placeholder="Address *">
 
                                     </div>
                                     <div class="form-group" style="float:left; width: 15.5em;">
-                                        <input required="" type="text" name="city"
-                                            placeholder="City / Town/ District *">
+                                        <input required="" type="text" name="city" id="address-city" onkeyup="validateCity()"  placeholder="City / Town/ District *">
                                     </div>
                                     <div class="form-group" style="float: right; width: 15.5em;">
-                                        <input required="" type="text" name="locality" placeholder="State *">
+                                        <input required="" type="text" name="state" id="address-state" onkeyup="validateState()" placeholder="State *">
                                     </div>
                                     <div class="form-group" style="float:left; width: 15.5em;">
-                                        <input required="" type="text" name="email" placeholder="Landmark (Optional) *">
+                                        <input type="text" name="landmark" id="address-landmark" onkeyup="validateLandmark()" placeholder="Landmark (Optional) *">
                                     </div>
                                     <div class="form-group" style="float: right; width: 15.5em;">
-                                        <input required="" type="text" name="phone"
-                                            placeholder="Alternate Phone (Optional) *">
+                                        <input type="text" name="contact2" id="address-secondno" onkeyup="validateContactSecond()" placeholder="Alternate Phone (Optional) *">
                                     </div>
 
                             </div>
-                            </form>
                             <div class="modal-footer">
                                 <button type="button" style="    padding-inline: 2em;margin-right: 2em;"
                                     class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -159,83 +170,6 @@
 
 </div>
 
-
-{{!-- <div class="card" style="width: 39em;padding: 2em;">
-    <div class="card-body">
-        <form method="post">
-            <div class="form-group" style="float:left; width: 15.5em;">
-                <input type="text" required="" name="fname" placeholder="First name *">
-            </div>
-            <div class="form-group" style="float: right; width: 15.5em;">
-                <input type="text" required="" name="lname" placeholder="Mobile number *">
-            </div>
-            <div class="form-group" style="float:left; width: 15.5em;">
-                <input required="" type="text" name="pincode" placeholder="Pincode *">
-            </div>
-            <div class="form-group" style="float: right; width: 15.5em;">
-                <input required="" type="text" name="locality" placeholder="Locality *">
-            </div>
-            <div class="form-group">
-                <input type="text" required="" placeholder="Address *">
-
-            </div>
-            <div class="form-group" style="float:left; width: 15.5em;">
-                <input required="" type="text" name="city" placeholder="City / Town/ District *">
-            </div>
-            <div class="form-group" style="float: right; width: 15.5em;">
-                <div class="custom_select">
-                    <select class="form-control select-active">
-                        <option value="">State...</option>
-                        <option value="AX">Andhra Pradesh</option>
-                        <option value="AF">Arunachal Pradesh</option>
-                        <option value="AL">Assam</option>
-                        <option value="DZ">Bihar</option>
-                        <option value="AD">Chhattisgarh</option>
-                        <option value="AO">Goa</option>
-                        <option value="AI">Gujarat</option>
-                        <option value="AQ">Haryana</option>
-                        <option value="AG">Himachal Pradesh</option>
-                        <option value="AR">Jharkhand</option>
-                        <option value="AM">Karnataka</option>
-                        <option value="AW">Kerala</option>
-                        <option value="AU">Madhya Pradesh</option>
-                        <option value="AT">Maharashtra</option>
-                        <option value="AZ">Manipur</option>
-                        <option value="BS">Meghalaya</option>
-                        <option value="BH">Mizoram</option>
-                        <option value="BD">Nagaland</option>
-                        <option value="BB">Odisha</option>
-                        <option value="BY">Punjab</option>
-                        <option value="PW">Rajasthan</option>
-                        <option value="BE">Sikkim</option>
-                        <option value="BZ">Tamil Nadu</option>
-                        <option value="BJ">Telangana</option>
-                        <option value="BM">Tripura</option>
-                        <option value="BT">Uttar Pradesh</option>
-                        <option value="BO">Uttarakhand</option>
-                        <option value="BO">West Bengal</option>
-
-                    </select>
-                </div>
-            </div>
-            <div class="form-group" style="float:left; width: 15.5em;">
-                <input required="" type="text" name="email" placeholder="Landmark (Optional) *">
-            </div>
-            <div class="form-group" style="float: right; width: 15.5em;">
-                <input required="" type="text" name="phone" placeholder="Alternate Phone (Optional) *">
-            </div>
-            <div style="padding-inline: 3em;margin-top: 15em;">
-
-                <button type="button" style="padding-inline: 4em;margin-right: 5em;" class="btn btn-secondary"
-                    data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-
-            </div>
-
-
-    </div>
-    </form>
-</div> --}}
 
 <style>
     .card {
@@ -261,4 +195,206 @@
     $('#myModal').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus')
     })
+
+
+
+ function validateName(){
+    console.log('function called')
+    const name = document.getElementById('address-name').value
+         if(name.length==0){
+         document.getElementById('address-name').style.borderColor='red'
+         return false;
+    }
+    var reg = new RegExp('^[0-9]$');
+
+    if(reg.test(name)==true){
+        document.getElementById('address-name').style.borderColor='red'
+         return false;
+    }
+
+    if(!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/))    
+    {
+        document.getElementById('address-name').style.borderColor='red'
+         return false;
+    }
+    
+    document.getElementById('address-name').style.borderColor='aquamarine'
+    return true;
+
+    }
+
+
+
+
+
+    function validateNo(){
+        const contact = document.getElementById('address-no').value
+        const regex = /[a-zA-Z]/;
+        console.log(typeof(contact))
+        if(contact.length==0){
+            document.getElementById('address-no').style.borderColor='red'
+            return false
+        } 
+
+        if(contact.length!==10){
+
+            document.getElementById('address-no').style.borderColor='red'
+            return false;
+        }
+        if(regex.test(contact)==true){
+        document.getElementById('address-no').style.borderColor='red'
+         return false;
+        }
+
+    
+        document.getElementById('address-no').style.borderColor='aquamarine'
+        return true
+    }
+
+
+
+
+
+    function validatePincode(){
+        const pincode = document.getElementById('address-pincode').value
+        const regex = /[a-zA-Z]/;
+        let x= 10 
+        console.log(typeof(x))
+      
+        if(pincode.length<6 || pincode.length>6){
+            
+            document.getElementById('address-pincode').style.borderColor='red'
+            return false
+        }
+        if(regex.test(pincode)==true){
+        document.getElementById('address-pincode').style.borderColor='red'
+         return false;
+        }
+        document.getElementById('address-pincode').style.borderColor='aquamarine'
+        return true
+    }
+
+
+
+
+
+
+    function validateState(){
+        const state = document.getElementById('address-state').value
+    console.log(state)
+    if(state.length==0){
+            console.log('length - 0')
+            document.getElementById('address-state').style.borderColor='red'
+            return false
+    } 
+
+    const regex = /[0-9]/;
+    if(regex.test(state)==true){
+        console.log(state)
+        document.getElementById('address-state').style.borderColor='red'
+         return false;
+    }
+
+     document.getElementById('address-state').style.borderColor='aquamarine'
+    return true;
+
+    }
+
+
+
+
+ function validateLocality(){
+        const locality = document.getElementById('address-locality').value
+    console.log(locality)
+    if(locality.length==0){
+            console.log('length - 0')
+            document.getElementById('address-locality').style.borderColor='red'
+            return false
+    } 
+
+    const regex = /[0-9]/;
+    if(regex.test(locality)==true){
+        document.getElementById('address-locality').style.borderColor='red'
+         return false;
+    }
+
+     document.getElementById('address-locality').style.borderColor='aquamarine'
+    return true;
+
+    }
+    
+
+
+
+
+ function validateAddress(){
+        const address = document.getElementById('address-address').value
+    if(address.length==0){
+            console.log('length - 0')
+            document.getElementById('address-address').style.borderColor='red'
+            return false
+    } 
+
+     document.getElementById('address-address').style.borderColor='aquamarine'
+    return true;
+
+    }
+
+
+
+     function validateCity(){
+        const city = document.getElementById('address-city').value
+    if(city.length==0){
+            console.log('length - 0')
+            document.getElementById('address-city').style.borderColor='red'
+            return false
+    } 
+
+     document.getElementById('address-city').style.borderColor='aquamarine'
+    return true;
+
+    }
+
+
+function validateLandmark(){
+        const landmark = document.getElementById('address-landmark').value
+    if(landmark.length==0){
+            console.log('length - 0')
+            document.getElementById('address-landmark').style.borderColor='red'
+            return false
+    } 
+
+     document.getElementById('address-landmark').style.borderColor='aquamarine'
+    return true;
+
+    }
+
+
+
+
+
+    function validateContactSecond(){
+        const contactscnd = document.getElementById('address-secondno').value
+        const regex = /[a-zA-Z]/;
+        if(contactscnd.length==0){
+            document.getElementById('address-secondno').style.borderColor='red'
+            return false
+        } 
+
+        if(contactscnd.length!==10){
+
+            document.getElementById('address-secondno').style.borderColor='red'
+            return false;
+        }
+        if(regex.test(contactscnd)==true){
+        document.getElementById('address-secondno').style.borderColor='red'
+         return false;
+        }
+
+    
+        document.getElementById('address-secondno').style.borderColor='aquamarine'
+        return true
+    }
+
+    
 </script>

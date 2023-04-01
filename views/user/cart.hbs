@@ -1,9 +1,15 @@
                 <div class="container-fluid" style="padding-top: 5em; padding-left: 2em; float: left; width:auto">
+                   {{#if cart}}
                     <div class="container" style="height: 17em; width: 54em; float: inherit;">
                         
 
                         {{#each cart}}
-                        <div id="cart-card" class="hero-card box-shadow-outer-6 wow fadeIn animated mb-30 hover-up d-flex" style="background-color:rgb(255, 255, 255)">
+                        <div id="cart-card" class="hero-card box-shadow-outer-6 wow fadeIn animated mb-30 hover-up d-flex" style=
+                         "background-color:rgb(236 236 236 / 69%);
+        background-clip: border-box;
+        border: 0 solid transparent;
+        border-radius: 2rem;
+        box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);">
                             <div class="hero-card-icon icon-left-2 hover-up ">
                                 <img class="btn-shadow-brand hover-up border-radius-5 bg-brand-muted" src="uploads/{{products.Image}}" alt="" style="height:6em">
                             </div>
@@ -18,7 +24,7 @@
                                 <div class="detail-qty border radius  m-auto">
                                                 <a onclick="countPlus( '{{products._id}}' , '{{quantity}}' , '1' ,{{products.newPrice}})" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
                                                 <span class="qty-val" id="{{products._id}}">{{quantity}}</span>
-                                                <a onclick="countPlus( '{{products._id}}' , '{{quantity}}' , '-1',{{products.newPrice}} )" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                                <a onclick="countPlus( '{{products._id}}' , '{{quantity}}' , '-1',{{products.newPrice}})" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                             </div>
                                             
 
@@ -52,7 +58,7 @@
            
            {{!-- mainnnnnnnnn --}}
                     <div class="col-md-4 col-lg-4" style="float:right;margin-left: 3em; margin-top: -15em;" id="proceed">
-                        <div class="hero-card box-shadow-outer-6 wow fadeIn animated mb-50 hover-up d-flex" style="background-color:rgb(255, 255, 255)">
+                        <div class="hero-card box-shadow-outer-6 wow fadeIn animated mb-50 hover-up d-flex" style="background-color:rgba(255, 255, 255, 0.69);">
                             <div class="pl-30" style="width:23em">
                                 <h5 class="mb-5 fw-500" style="text-align: center;color:rgb(7, 127, 151);font-weight:900;">
                                     PRICE DETAILS
@@ -80,8 +86,7 @@
                                 <a href="/check-payment">
 
                                     <button type="button" class="btn btn-success" style="padding-inline: 5em; text-align:center;background-color:rgb(7, 127, 151)">PLACE ORDER</button>
-                                </a>
-                                
+                                </a> 
                                 <br>
                                 <br>
                                 <p style="text-align: center;">or</p>
@@ -93,8 +98,37 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                    {{else}}
 
+<div id="content" class="col-sm-12" style="text-align:center;">
+<style>
+    .error_img{
+    display: block;
+    text-align: center;
+    width: 16em;
+    margin-inline: 36em;
+    padding-top: 3em;
+    }
+    .btn.btn-mega{
+    text-align: center;
+    border: 1px solid #fff;
+    background: #fff;
+    padding: 10px 30px;
+    border-radius: 50px;
+    box-shadow: 0 0 9px 1px #eaeaea;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: 'Celiasbold';
+    background: black;
+    }
+                        </style>
+                        <img src="https://minbury.com/empty%20cart%20icon.svg" class="error_img" >
+                        <h2 style="font-family: 'Celiasbold';font-size: 18px;color: #000;">Your Cart is Empty</h2>
+                        <p style="margin-bottom: 2%;font-size: 14px;font-family: 'Celias';">Looks like you haven't added <br> anything to your cart yet </p>   
+                        <a href="/" class="btn btn-mega" style="">Start Shopping</a>
+</div>
+{{/if}}
+                </div>
 {{!-- <style>
     .sticky {
   position: fixed;
@@ -121,7 +155,5 @@ function myFunction() {
   }
 }
 </script> --}}
-
-
 
 

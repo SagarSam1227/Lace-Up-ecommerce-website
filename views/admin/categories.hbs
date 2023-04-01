@@ -1,13 +1,13 @@
 <section class="content-main">
 
-            <div class="card" style="margin-top: 7em;" >
+            <div class="card" style="margin-top: 7em;border: none;">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3">
                             <form action="/admin/categories" method="post">
                               <div class="mb-4">
                                     <label class="form-label">Category</label>
-                                    <select class="form-select" name="category">
+                                    <select class="form-select" id="cat" name="category">
                                         <option><a href="" >Men</a></option>
                                         <option><a href="">Women</a></option>
                                         <option><a href="">Kids</a></option>
@@ -15,18 +15,26 @@
                                 </div> 
                                 <div class="mb-4">
                                     <label for="product_slug" class="form-label">Sub category</label>
-                                    <input type="text" placeholder="Type here" class="form-control" id="product_slug" name="subcategory" />
+                                    <input type="text" placeholder="Type here" class="form-control" id="sub" name="subcategory" />
                                 </div>
                                
                                 <div class="mb-4">
                                     <label class="form-label">Description</label>
                                     <textarea name="description" placeholder="Type here" class="form-control"></textarea>
                                 </div>
+                                {{#if cat}}
+                                           <div class="alert alert-danger" role="alert">
+
+                                            <a href="" style="margin-left: 1em;">{{cat}}</a>
+                                                <img src="https://cdn-icons-png.flaticon.com/512/1182/1182679.png" style="height: 1.3em; width: 1.3em; margin-bottom: -0.3em;" alt="">
+                                            </div>
+                                            {{/if}}
                                 <div class="d-grid">
-                                    <button  class="btn btn-primary">create</button>
+                                    <button onclick="checkExisting()"  class="btn btn-primary">create</button>
                                 </div>
                             </form>
                         </div>
+                        {{#if data}}
                         <div class="col-md-9">
                             <div class="table-responsive">
                                 <table class="table table-hover">
@@ -68,7 +76,36 @@
                                     {{/each}}
                                 </table>
                             </div>
-                        </div> <!-- .col// -->
+                        </div>
+                        {{else}}
+                        
+                        
+                        <div id="content" class="col-sm-12" style="text-align:center;width: 67em;">
+<style>
+    .error_img{
+    display: block;
+    text-align: center;
+    width: 16em;
+    margin-inline: 25em;
+    }
+    .btn.btn-mega{
+    text-align: center;
+    border: 1px solid #fff;
+    background: #fff;
+    padding: 10px 30px;
+    border-radius: 50px;
+    box-shadow: 0 0 9px 1px #eaeaea;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: 'Celiasbold';
+    background: black;
+    }
+                        </style>
+                        <img src="https://minbury.com/empty%20cart%20icon.svg" class="error_img" >
+                        <h2 style="font-family: 'Celiasbold';font-size: 18px;color: #000;">Empty</h2>
+                        <p style="margin-bottom: 2%;font-size: 14px;font-family: 'Celias';">Looks like you haven't created <br> anything yet </p>   
+</div>
+{{/if}}
                     </div> <!-- .row // -->
                 </div> <!-- card body .// -->
             </div> <!-- card .// -->

@@ -26,4 +26,16 @@ module.exports = {
       resolve(categoryFind);
     });
   },
+  checkCategory: (cat, sub) => {
+    return new Promise(async (resolve, reject) => {
+      let status = await Category.find({
+        $and: [{ sub: sub }, { category: cat }],
+      });
+      if (status.length == 0) {
+        resolve(false);
+      } else {
+        resolve(true);
+      }
+    });
+  },
 };

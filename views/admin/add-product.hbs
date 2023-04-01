@@ -5,6 +5,13 @@
     <label for="formGroupExampleInput">Name</label>
     <input type="text" name="name" class="form-control d-flex justify-content-center" id="formGroupExampleInput">
   </div>
+  {{#if proExist}}
+                                           <div class="alert alert-danger" role="alert" style="width: 25.5em;">
+
+                                            <a href="" style="margin-left: 1em;">{{proExist}}</a>
+                                                <img src="https://cdn-icons-png.flaticon.com/512/1182/1182679.png" style="height: 1.3em; width: 1.3em; margin-bottom: -0.3em;" alt="">
+                                            </div>
+                                            {{/if}}
  <label class="form-label">Category</label>
    <select class="form-select ml-5" style="width: 22em;
     height: 3em;
@@ -15,20 +22,62 @@
 </select>
   <div class="form-group ml-5" style="width: 25em;">
     <label for="formGroupExampleInput2">new-price</label>
-    <input type="value" name="newPrice" class="form-control" id="formGroupExampleInput2">
+    <input type="value" required="" name="newPrice" class="form-control" onkeyup="validPrice('new-price')" id="new-price">
   </div>
 
 <div class="form-group ml-5" style="width: 25em;">
     <label for="formGroupExampleInput2">old-price</label>
-    <input type="value" name="oldPrice" class="form-control" id="formGroupExampleInput2">
+    <input type="value" required="" name="oldPrice" class="form-control"  onkeyup="validPrice('old-price')" id="old-price">
   </div>
 
-  <div class="form-group ml-5" style="width: 25em;"><label for="formGroupExampleInput2">Image</label>
+  <div class="form-group ml-5" style="width: 12em;
+    float: right;
+    margin-right: 31.7em;">
+    <label for="formGroupExampleInput2">Image</label>
     <input type="file" name="Image" class="form-control" id="formGroupExampleInput2" >
   </div>
-    <br>
+    {{#if vdoErr}}
+                                           <div class="alert alert-danger" role="alert" style="width: 25.5em;">
+
+                                            <a href="" style="margin-left: 1em;">{{vdoErr}}</a>
+                                                <img src="https://cdn-icons-png.flaticon.com/512/1182/1182679.png" style="height: 1.3em; width: 1.3em; margin-bottom: -0.3em;" alt="">
+                                            </div>
+                                            {{/if}}
   </div class="mt-4">
+  <div class="form-group ml-5" style="width: 12em;">
+    <label for="formGroupExampleInput2">stock</label>
+    <input type="value" required="" name="stock" class="form-control"  id="stock" onkeyup="validPrice('stock')">
+  </div>
+  <br>
     <button type="submit" class="btn btn-success float-right" style="margin-top: 1em;
     margin-left: 16em;">ADD</button>
     <br><br><br><br><br><br>
 </form>  
+
+
+<script>
+
+function validPrice(priceId){
+        const price = document.getElementById(priceId).value
+      console.log(price)
+    const reg = /[a-zA-Z]/;
+        if(price==0){
+          document.getElementById(priceId).style.borderColor='red'
+        return false
+        }
+    const regex = /^-\d*\.?\d+$/
+        if(regex.test(price)==true){
+           document.getElementById(priceId).style.borderColor='red'
+        return false
+        }
+
+         if(reg.test(price)==true){
+        document.getElementById(priceId).style.borderColor='red'
+         return false;
+        }
+        document.getElementById(priceId).style.borderColor='#e2e9e1'
+        return true
+      }
+
+
+</script>
