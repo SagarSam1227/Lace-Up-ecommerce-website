@@ -28,7 +28,7 @@ module.exports = {
         },
         {
           $inc:{
-            balance:amount
+            balance:amount 
           }
         }
       );

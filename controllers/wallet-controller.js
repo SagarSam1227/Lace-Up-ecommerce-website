@@ -9,4 +9,4 @@ module.exports = {
             res.render('user/wallet',{user:true,data,order})
         })
     }
-}
+} 
