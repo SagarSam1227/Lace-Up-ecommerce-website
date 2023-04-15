@@ -364,11 +364,16 @@
                                      <li>
                                         <a class="active" href="/">Home</a>
                                     </li>
-                                    <li><a href="">Categories<i class="fi-rs-angle-down"></i></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="/category-collection/Men">Men</a></li>
-                                            <li><a href="/category-collection/Women">Women</a></li>
-                                            <li><a href="/category-collection/Kids">Kids</a></li>
+                                    <li onmouseenter="subcategoryList('Men')"><a href="">Men<i class="fi-rs-angle-down"></i></a>
+                                        <ul id="Men-cat"  class="sub-menu">
+                                        </ul>
+                                    </li>
+                                    <li onmouseenter="subcategoryList('Women')"><a href="">Women<i class="fi-rs-angle-down"></i></a>
+                                        <ul id="Women-cat"  class="sub-menu">
+                                        </ul>
+                                    </li>
+                                   <li onmouseenter="subcategoryList('Kids')"><a href="">Kids<i class="fi-rs-angle-down"></i></a>
+                                        <ul id="Kids-cat"  class="sub-menu">
                                         </ul>
                                     </li>
                                     {{#if user}}
@@ -385,7 +390,7 @@
                         </div>
                     </div>
                         {{#if user}}
-                    <div class="nav-item" role="presentation" style="margin-left: 40em;">
+                    <div class="nav-item" role="presentation" style="margin-left: 31em;">
 
                         <a href="/cart">
                             <span class="badge badge-pill badge-info" style="width: 2em;background: #2dd2c2;color: black;" id="cart-count">{{count}}</span>

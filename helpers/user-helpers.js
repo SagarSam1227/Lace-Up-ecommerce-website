@@ -1,8 +1,16 @@
 var db = require("../config/connection");
 var bcrypt = require("bcrypt");
 const users = require("../models/user-model");
+const admin = require('../models/admin-model')
 
 module.exports = {
+  CHECK_ADMIN:()=>{
+    return new Promise(async(resolve,reject)=>{
+      const findUser = await admin.find()
+      resolve(findUser)
+    })
+  },
+
   finding: () => {
     return new Promise(async (resolve, reject) => {
       let findUser = await users.find();
@@ -115,7 +123,6 @@ module.exports = {
       }
         ]
       );
-      // console.log(address);
       resolve(address);
     });
   },

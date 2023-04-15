@@ -14,14 +14,12 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  oldPrice: {
-    type: Number,
-    required: true,
-  },
   newPrice: {
     type: Number,
     required: true,
   },
+
+  offer:Number,
   Image: {
     type: String,
     required: true,

@@ -122,13 +122,13 @@
     font-family: ui-rounded;
     font-size: 1.3em;">{{order.status}}</h5>
     {{#ifChecking order.status}}
-    <div class="dropdown">
+    <div id="drop-down-btn"  class="dropdown">
    <button class=="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="width:5em;margin-top: -0.5em;color: white;
     background: black;
     border-radius: 0.6em;
-    border: none;">Change</button>
+    border: none;"  >Change</button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><span class="dropdown-item" onclick="changeStatus((this.textContent || this.innerText),'{{order._id}}')">Approved</span></li>
+    <li><span class="dropdown-item" onclick="changeStatus((this.textContent || this.innerText),'{{order._id}}')">Cancel</span></li>
     <li><span class="dropdown-item" onclick="changeStatus((this.textContent || this.innerText),'{{order._id}}')">Shipped</span></li>
     <li><span class="dropdown-item" onclick="changeStatus((this.textContent || this.innerText),'{{order._id}}')">Delivered</span></li>
   </ul>

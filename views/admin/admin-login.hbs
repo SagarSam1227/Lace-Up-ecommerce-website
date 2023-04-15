@@ -28,8 +28,12 @@
                   
                 </div>
   
-                {{#if adminErr}}
-                  <span style="color: red;">{{adminErr}}</span>
+               {{#if adminErr}}
+                <div class="alert alert-danger" role="alert">
+
+                <a href="" style="margin-left: 1em;">{{adminErr}}</a>
+                <img src="https://cdn-icons-png.flaticon.com/512/1182/1182679.png" style="height: 1.3em; width: 1.3em; margin-bottom: -0.3em;" alt="">
+                </div>
                 {{/if}}
                 
                 <!-- Submit button -->

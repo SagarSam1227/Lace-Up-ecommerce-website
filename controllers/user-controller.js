@@ -9,6 +9,7 @@ const sendOtp = require("../middlewares/twilio");
 const { Enqueue } = require("twilio/lib/twiml/VoiceResponse");
 const ALERTS = require("../config/enums");
 const orderHelper = require("../helpers/order-helpers");
+const walletHelper = require('../helpers/wallet-helpers')
 
 module.exports = {
   userHome: async (req, res) => {
@@ -17,7 +18,7 @@ module.exports = {
 
       req.session.count = count;
 
-      adminController.displayProducts(req, res,Session=true);
+      adminController.displayProducts(req, res, (Session = true));
     } else {
       adminController.displayProducts(req, res);
     }
@@ -57,7 +58,8 @@ module.exports = {
 
   postSignup: async (req, res) => {
     let data = req.body;
-    await cartHelper.insertfirstProduct(data);
+    await cartHelper.CREATE_CART(data);
+    await walletHelper.CREATE_WALLET(data);
     userHelper.addUser(data).then(res.redirect("/login"));
   },
 
@@ -196,5 +198,5 @@ module.exports = {
     await userHelper
       .removeAddress(req.session.email, id)
       .then(res.redirect("/user-account"));
-  }
+  },
 };

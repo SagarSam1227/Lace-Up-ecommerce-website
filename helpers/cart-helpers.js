@@ -11,7 +11,7 @@ module.exports = {
     });
   },
 
-  insertfirstProduct: (data) => {
+  CREATE_CART: (data) => {
     return new Promise(async (resolve, reject) => {
       const cartDetails = new cart({
         userId: data.email,

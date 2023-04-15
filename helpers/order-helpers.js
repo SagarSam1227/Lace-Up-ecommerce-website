@@ -20,7 +20,6 @@ module.exports = {
         status: "Pending",
       });
       orderDetails.save();
-      console.log(orderDetails);
       resolve(orderDetails);
     });
   },
@@ -51,7 +50,6 @@ module.exports = {
           status: status,
         }
       );
-      console.log(state);
       resolve(state);
     });
   },
@@ -95,8 +93,18 @@ module.exports = {
           paymentMethod: paymentMethod,
         }
       );
-      console.log(state);
       resolve(state);
     });
+  },
+
+
+  GET_ORDER_WALLET:(email,paymentMethod)=>{
+    return new Promise(async(resolve,reject)=>{
+      const orderDetails = await order.find({
+        userId:email,
+        paymentMethod:paymentMethod
+      })
+      resolve(orderDetails)
+    })
   }
 };

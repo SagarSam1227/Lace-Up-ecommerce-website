@@ -11,7 +11,8 @@ var adminRouter = require('./routes/admin');
 var dbConnect = require('./config/connection')
 var bodyParser =require('body-parser')
 const Handlebars = require('handlebars');
-var cors = require('cors')
+var cors = require('cors');
+const { handlebars } = require('hbs');
 // require('dotenv').config({path:'../.env'});
 require('dotenv').config()
 
@@ -19,7 +20,6 @@ var app = express();
 
 app.use(cors())
 Handlebars.registerHelper('ifEquals',(str)=>{
-  console.log('handlebarrr called');
   if(str=='Delivered')return 'Return ?'
   return 'Cancel ?'
 })
@@ -27,6 +27,41 @@ Handlebars.registerHelper('ifEquals',(str)=>{
 Handlebars.registerHelper('ifChecking', function(str, options) {
   return (str != 'Returned' && str!= 'Cancelled') ? options.fn(this) : options.inverse(this);
 });
+
+Handlebars.registerHelper('offerCalculate', (offer,price)=>{
+   const newPrice = Math.floor(price-((price*offer)/100))
+   return newPrice
+  
+})
+
+Handlebars.registerHelper('payMethod',(method)=>{
+  if(method ==='Cash on Delivery'){
+    return 'COD'
+  }
+  else if(method ==='Wallet'){
+    return 'Wallet'
+  }else{
+    return 'Online'
+  }
+})
+
+
+Handlebars.registerHelper('checkScheme',function(scheme){
+  console.log(scheme);
+  if(scheme.type == 'Amount'){
+    return 'Buy more than '+scheme.amount+'/- to avial this coupon'
+  }
+  return 'Buy any '+scheme.cat+' '+scheme.sub+ ' FootWear'
+})
+
+
+Handlebars.registerHelper('cancelorNot', (status)=>{
+  if(status ==='Cancelled'){
+    return 'Credit'
+  }else{
+    return  'Debit'
+  }
+})
 
 
 

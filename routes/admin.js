@@ -8,18 +8,21 @@ const Product = require("../models/product-model");
 var multerFile = require("../config/multer");
 const categoryController = require("../controllers/category-controller");
 const orderController = require("../controllers/order-controller")
+const couponController= require('../controllers/coupon-controller')
 
 router.get("/", adminSession.adminLogin, adminController.Admin_LoginPage);
 
 router
   .route("/dashboard")
   .get(adminSession.adminCheck, adminController.display_Dashboard)
-  .post(adminSession.sessionCreat);
+  .post(adminController.checkAdmin,adminSession.sessionCreat);
 
 router
   .route("/categories", adminSession.adminCheck)
   .get(categoryController.get_Categories)
   .post(categoryController.add_Category);
+
+  router.post('/get-subcategory',categoryController.getsubCategory)
 
 router
   .route("/edit-product/:id")
@@ -67,6 +70,14 @@ router.get(
   adminController.userUnblock,
   adminController.userRedirect
 );
+
+router.get("/offers",adminSession.adminCheck,adminController.getOffers)
+router.post('/offers',adminController.setOffers)
+
+router.post('/offers-product',adminController.setOffersProduct)
+
+router.get('/coupons',adminSession.adminCheck,couponController.getCoupons)
+router.post('/coupons',couponController.postCoupon)
 
 
 router.get("/list-users", adminSession.adminCheck, adminController.usersList);

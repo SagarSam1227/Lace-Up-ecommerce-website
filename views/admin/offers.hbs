@@ -1,10 +1,11 @@
 <br><br><br>
-<h5 class="text-center mb-3 mt-3 " style="padding-top: 5em;" >ADD PRODUCTS</h5>
-<form action="/admin/add-product" enctype="multipart/form-data" method="post" style="margin-left: 33em;">
-  <div class="form-group ml-5" style="width: 25em;">
-    <label for="formGroupExampleInput">Name</label>
-    <input type="text" name="name" class="form-control d-flex justify-content-center" id="formGroupExampleInput">
-  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+        <center>
+  <h5 class="mb-3 " style="padding-top: 2em;" >Create Offers</h5>
+<form action="/admin/offers"  method="post" style="">
   {{#if proExist}}
                                            <div class="alert alert-danger" role="alert" style="width: 25.5em;">
 
@@ -27,38 +28,52 @@
     margin-bottom: 1em;" aria-label="Default select example" name="subcategory">
 </select>
   <div class="form-group ml-5" style="width: 25em;"> 
-    <label for="formGroupExampleInput2">Price</label>
-    <input type="value" required="" name="newPrice" class="form-control" onkeyup="validPrice('new-price')" id="new-price">
+    <label for="formGroupExampleInput2">Discount</label>
+    <input type="value" required="" name="discount" class="form-control" onkeyup="validPrice('new-price')" id="new-price">
   </div>
-
-{{!-- <div class="form-group ml-5" style="width: 25em;">
-    <label for="formGroupExampleInput2">old-price</label>
-    <input type="value" required="" name="oldPrice" class="form-control"  onkeyup="validPrice('old-price')" id="old-price">
-  </div> --}}
-
-  <div class="form-group ml-5" style="width: 12em;
-    float: right;
-    margin-right: 31.7em;">
-    <label for="formGroupExampleInput2">Image</label>
-    <input type="file" name="Image" class="form-control" id="formGroupExampleInput2">
-  </div>
-    {{#if vdoErr}}
+  <button type="submit" class="btn btn-success" style="margin-top: 1em;">Create</button>
+    <br><br><br><br><br><br>
+</form> 
+        </center>
+    
+    </div>
+    <div class="col">
+        <center>
+ <h5 class="mb-3 " style="padding-top: 2em;" >Create Offers</h5>
+<form action="/admin/offers-product" method="post" style="">
+  {{#if proExist}}
                                            <div class="alert alert-danger" role="alert" style="width: 25.5em;">
 
-                                            <a href="" style="margin-left: 1em;">{{vdoErr}}</a>
+                                            <a href="" style="margin-left: 1em;">{{proExist}}</a>
                                                 <img src="https://cdn-icons-png.flaticon.com/512/1182/1182679.png" style="height: 1.3em; width: 1.3em; margin-bottom: -0.3em;" alt="">
                                             </div>
                                             {{/if}}
-  </div class="mt-4">
-  <div class="form-group ml-5" style="width: 12em;">
-    <label for="formGroupExampleInput2">stock</label>
-    <input type="value" required="" name="stock" class="form-control"  id="stock" onkeyup="validPrice('stock')">
+ <label class="form-label">Products</label>
+   <select id="category"  class="form-select ml-5" style="width: 22em;
+    height: 3em;
+    flow:down;
+    margin-bottom: 1em;" aria-label="Default select example" name="product">
+  <option value="" hidden >Select Poduct</option>
+  {{#each data}}
+  
+  <option ><a href="">{{name}}</a></option>
+  
+  {{/each}}
+</select>
+
+  <div class="form-group ml-5" style="width: 25em;"> 
+    <label for="formGroupExampleInput2">Discount</label>
+    <input type="value" required="" name="discount" class="form-control" onkeyup="validPrice('dis-count')" id="dis-count">
   </div>
-  <br>
-    <button type="submit" class="btn btn-success float-right" style="margin-top: 1em;
-    margin-left: 16em;">ADD</button>
+  <button type="submit" class="btn btn-success" style="margin-top: 1em;">CREATE</button>
     <br><br><br><br><br><br>
-</form>  
+</form> 
+        </center>
+     
+    </div>
+  </div>
+</div>
+ 
 
 
 <script>

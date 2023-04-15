@@ -20,6 +20,16 @@
                             </li>
                             <br>
                             <li class="list d-flex justify-content-between align-items-center flex-wrap"
+                                style="font-size: 1.2em;text-align: center;padding-left: 4em;">
+                                <a href="/coupons-user">Coupons</a>
+                            </li>
+                            <br>
+                            <li class="list d-flex justify-content-between align-items-center flex-wrap"
+                                style="font-size: 1.2em;text-align: center;padding-left: 4em;">
+                                <a href="/wallet">Wallet</a>
+                            </li>
+                            <br>
+                            <li class="list d-flex justify-content-between align-items-center flex-wrap"
                                 style="font-size: 1.2em;text-align: center;padding-left: 2em;">
                                 <a href="">Change password?</a>
                             </li>
@@ -199,7 +209,6 @@
 
 
  function validateName(){
-    console.log('function called')
     const name = document.getElementById('address-name').value
          if(name.length==0){
          document.getElementById('address-name').style.borderColor='red'
@@ -230,7 +239,6 @@
     function validateNo(){
         const contact = document.getElementById('address-no').value
         const regex = /[a-zA-Z]/;
-        console.log(typeof(contact))
         if(contact.length==0){
             document.getElementById('address-no').style.borderColor='red'
             return false
@@ -259,7 +267,6 @@
         const pincode = document.getElementById('address-pincode').value
         const regex = /[a-zA-Z]/;
         let x= 10 
-        console.log(typeof(x))
       
         if(pincode.length<6 || pincode.length>6){
             
@@ -281,16 +288,16 @@
 
     function validateState(){
         const state = document.getElementById('address-state').value
-    console.log(state)
+
     if(state.length==0){
-            console.log('length - 0')
+        
             document.getElementById('address-state').style.borderColor='red'
             return false
     } 
 
     const regex = /[0-9]/;
     if(regex.test(state)==true){
-        console.log(state)
+    
         document.getElementById('address-state').style.borderColor='red'
          return false;
     }
@@ -305,9 +312,9 @@
 
  function validateLocality(){
         const locality = document.getElementById('address-locality').value
-    console.log(locality)
+
     if(locality.length==0){
-            console.log('length - 0')
+        
             document.getElementById('address-locality').style.borderColor='red'
             return false
     } 
@@ -330,7 +337,7 @@
  function validateAddress(){
         const address = document.getElementById('address-address').value
     if(address.length==0){
-            console.log('length - 0')
+    
             document.getElementById('address-address').style.borderColor='red'
             return false
     } 
@@ -345,7 +352,7 @@
      function validateCity(){
         const city = document.getElementById('address-city').value
     if(city.length==0){
-            console.log('length - 0')
+        
             document.getElementById('address-city').style.borderColor='red'
             return false
     } 
@@ -359,7 +366,7 @@
 function validateLandmark(){
         const landmark = document.getElementById('address-landmark').value
     if(landmark.length==0){
-            console.log('length - 0')
+    
             document.getElementById('address-landmark').style.borderColor='red'
             return false
     } 

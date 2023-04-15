@@ -4,10 +4,11 @@ const userHelper = require("../helpers/user-helpers");
 const productHelper = require("../helpers/product-helpers");
 const { response } = require("../app");
 const { Reject } = require("twilio/lib/twiml/VoiceResponse");
+const couponHelpers = require("../helpers/coupon-helpers");
+const walletHelper = require('../helpers/wallet-helpers')
 
 module.exports = {
   placeOrder: async (req, res) => {
-    console.log(req.body);
     const paymentMethod = req.body.payment_option;
     const AddressId = req.body.id;
     const result = await cartHelper.GET_CART(req.session.email);
@@ -43,20 +44,36 @@ module.exports = {
     await cartHelper.removeCart(req.session.email);
 
     if (status) {
-      console.log("status is ", status);
       if (paymentMethod === "Cash on Delivery") {
         req.session.order = false;
         await orderHelper.updatePayMethod(status._id, paymentMethod);
-        await orderHelper.CHANGE_STATUS(status._id, (state = "Processing"));
-        res.json({ COD_SUCCESS: true });
-      } else {
-        console.log(status._id);
-        console.log("total amount is ", TotalAmount);
+        await orderHelper.CHANGE_STATUS(status._id, (state = "Placed"));
+        res.json({ status: 'COD' });
+
+
+      } else if(paymentMethod==='Wallet'){
+
+       const result= await walletHelper.GET_WALLET(req.session.email)
+        if(result){
+          if(result.balance<TotalAmount){
+            res.json({status:'EMPTY'})
+          }else{
+            
+        await orderHelper.updatePayMethod(status._id, paymentMethod);
+        await orderHelper.CHANGE_STATUS(status._id, (state = "Placed"));
+        await walletHelper.UPDATE_WALLET(req.session.email,-TotalAmount)
+            res.json({status:'WALLET'})
+          }
+        }
+
+      }
+      
+      else{
         await orderHelper.updatePayMethod(status._id, paymentMethod);
         await orderHelper
           .generateRazorpay(status._id, TotalAmount)
           .then((response) => {
-            console.log("response is ", response);
+            
             res.json(response);
           })
           .catch((err) => console.log(err));
@@ -74,12 +91,11 @@ module.exports = {
     const id = req.params.id;
     const result = await orderHelper.getOneOrder(id);
     const order = JSON.parse(JSON.stringify(result));
-    console.log(order);
 
     //finding address
     const user = await userHelper.findAddress(order.userId, order.addressId);
     const USER = JSON.parse(JSON.stringify(user));
-    console.log(USER[0].address);
+  
     const Address = USER[0].address;
     //
     const product = JSON.parse(JSON.stringify(order.product));
@@ -99,10 +115,19 @@ module.exports = {
   changeStatus: async (req, res) => {
     const status = req.body.status;
     const orderId = req.body.orderId;
+    if(status ==='Cancelled'){
+      const orderDetails = await orderHelper.getOneOrder(orderId)
+      const TotalAmount = orderDetails.Total
+      if(orderDetails.status!=='Pending'){
+        if(orderDetails.paymentMethod!=='Cash on Delivery'){
 
+          await walletHelper.UPDATE_WALLET(req.session.email,TotalAmount)
+        }
+      }
+    }
     await orderHelper
       .CHANGE_STATUS(orderId, status)
-      .then(res.json({ status: true }));
+      .then(res.json({status:true}));
   },
 
   renderSuccess: (req, res) => {
@@ -111,12 +136,11 @@ module.exports = {
 
   verifyPayment: async (req, res) => {
     const details = req.body;
-    console.log(details);
     await orderHelper
       .VERIFY_PAYMENT(details)
       .then(() => {
         orderHelper
-          .CHANGE_STATUS(details["order[receipt]"], (state = "Processing"))
+          .CHANGE_STATUS(details["order[receipt]"], (state = "Placed"))
           .then(() => {
             console.log("payment successfull");
             req.session.order = false;

@@ -1,5 +1,6 @@
+
 const Category = require("../models/category-model");
-const Product = require("../models/product-model");
+
 
 module.exports = {
   saveCategory: (data) => {
@@ -14,9 +15,11 @@ module.exports = {
     });
   },
 
-  findCategoryUser: (cat) => {
+  findsubCategory: (cat,sub) => {
     return new Promise(async (resolve, reject) => {
-      let categoryFind = await Product.find({ category: cat });
+      let categoryFind = await Category.find({
+        $and: [{ sub: sub }, { category: cat }],
+      });
       resolve(categoryFind);
     });
   },
@@ -38,4 +41,43 @@ module.exports = {
       }
     });
   },
-};
+
+  GET_SUBCATEGORY: (category) => {
+    return new Promise(async (resolve, reject) => {
+      const subcategoryList = await Category.find({
+        category: category,
+      });
+      resolve(subcategoryList);
+    });
+  },
+
+  AddProductToSub: (body,id, Image) => {
+    const productObj = {
+      name: body.name,
+      price: body.newPrice,
+      Image: Image,
+      id:id
+    };
+    const cat = body.category;
+    const sub = body.subcategory;
+
+    return new Promise(async (resolve, reject) => {
+      await Category.updateOne({
+         $and: [{ sub: sub }, { category: cat }]},
+         {
+          $push:{products:productObj}
+         }
+         );
+         resolve()
+    });
+  },
+  
+  subcategoryProducts:(cat, sub) => {
+    return new Promise(async (resolve, reject) => {
+      let details = await Category.findOne({
+        $and: [{ sub: sub }, { category: cat }],
+      });
+      resolve(details)
+    })
+}
+}

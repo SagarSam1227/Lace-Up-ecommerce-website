@@ -980,14 +980,24 @@
                                         </div>
                                         <h2><a href="">{{name}}</a></h2>
                                         <div class="rating-result" title="90%">
+                                            {{#if offer}}
                                             <span>
-                                                <span>{{rating}}%</span>
+                                                <span>{{offer}}% off</span>
                                             </span>
+                                        </div>
+                                            <div class="product-price">
+                                            <span>{{offerCalculate offer newPrice}}</span>
+                                            <span class="old-price">{{newPrice}}</span>
+                                        </div>
+                                            {{else}}
+                                            
                                         </div>
                                         <div class="product-price">
                                             <span>₹ {{newPrice}}</span>
-                                            <span class="old-price">₹ {{oldPrice}}</span>
+                                           
                                         </div>
+                                            {{/if}}
+                                            
                                         {{!-- <div class="product-action-1 show">
                                             <a aria-label="Add To Cart" class="action-btn hover-up" href="/cart/{{_id}}"><i class="fi-rs-shopping-bag-add"></i></a>
                                         </div> --}}

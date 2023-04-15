@@ -59,7 +59,7 @@ module.exports = {
   getCart: (req, res) => {
     cartHelper.GET_CART(req.session.email).then((result) => {
       const cart = JSON.parse(JSON.stringify(result));
-      console.log(cart);
+     
       let Total = 0;
       for (let i = 0; i < cart.length; i++) {
         Total += cart[i].subTotal;
@@ -94,13 +94,13 @@ module.exports = {
     }
   },
   updateplusCount: async (req, res) => {
-    console.log('body of ',req.body);
+  
     const updatedPrice = req.body.price;
     const count= req.body.count
     const proId = req.params.id;
     const product = await productHelper.findOneProduct(proId)
     if(count>product.stock){
-      console.log('errrrrrrrrr');
+   
       res.json({status:false});
     }else{
 

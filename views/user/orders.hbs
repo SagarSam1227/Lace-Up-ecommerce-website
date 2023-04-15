@@ -4,21 +4,24 @@
     <table class="table" >
   <thead class="thead-dark">
     <tr class="d-flex flex-row" style="background: #f4f0ec;">
-      <th scope="col" style="width:15em">Order No.</th>
-      <th scope="col" style="width:15em">Date</th>
-      <th scope="col" style="width:10em">Status</th>
-      <th scope="col" style="width:10em">Total</th>
-      <th scope="col" style="width:10em">Action</th>
+      <th scope="col" style="width:16em">order No</th>
+      <th scope="col" style="width:11em">Date</th>
+      <th scope="col" style="width:10em">Payment method</th>
+      <th scope="col" style="width:9em">Total</th>
+      <th scope="col" style="width:9em">Status</th>
+      <th scope="col" style="width:5em">Action</th>
     </tr>
   </thead>
   <tbody>
     {{#each data}}
     <tr class="d-flex flex-row">
-      <td class="items" style="width:15em">{{_id}}</td>
-      <td class="items" style="width:15em">{{orderDate}}</td>
-      <td class="items" style="width:10em">{{status}}</td>
-      <td class="items" style="width:10em">₹ {{Total}}</td>
-      <td class="items" style="width:10em"><a href="/order-details/{{_id}}">View</a></td>
+      <td class="items" style="width:16em">{{_id}}</td>
+      <td class="items" style="width:11em">{{orderDate}}</td>
+      <td class="items" style="width:10em">{{payMethod paymentMethod}}</td>
+      <td class="items" style="width:9em">₹ {{Total}}</td>
+      <td class="items" style="width:9em">{{status}}</td>
+      <td class="items" style="width:5em"><a href="/order-details/{{_id}}">View</a></td>
+
     </tr>
     {{/each}}
     {{else}}

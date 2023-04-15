@@ -14,7 +14,7 @@ const editedStorage = multer.diskStorage({
     cb(null, "public/uploads");
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
+    cb(null, file.originalname); 
   },
 });
 

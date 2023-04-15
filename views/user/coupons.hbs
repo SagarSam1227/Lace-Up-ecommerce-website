@@ -1,0 +1,87 @@
+
+
+<section id="">
+  <div class="container">
+	<div class="row">
+    {{#each data}}
+
+        <div class="col-sm-6 col-md-3" style="width: 20%; border-radius: 50px;">
+          <div class="dl">
+            <div class="discount alizarin">{{discount}}%
+                <div class="type">off</div>
+            </div>
+            <div class="descr">
+                <strong style="color: #2c3e50;font-size: 18px;font-family: ddd;">• {{checkScheme scheme}}</strong> 
+             </div>
+            <div class="ends">
+                <small style="font-family: ddd;">Validity - {{number}}{{validity}} </small>
+            </div>
+            {{!-- <div class="coupon midnight-blue">
+                <a data-toggle="collapse" href="#code-{{code}}" class="open-code" style="font-family: monospace;">GET A CODE</a>
+                <div id="code-{{code}}" class="collapse code">
+                  <div id="coupon-{{code}}" style="width: fit-content;">
+                    {{code}}
+                  </div>
+                  <img style="width: 17px;float: right;margin-top:-1em;" onclick="copyCode('{{code}}')" src="https://cdn-icons-png.flaticon.com/512/1827/1827923.png" alt="">
+                </div>
+            </div> --}}
+          </div>
+        </div>
+    {{/each}}
+	</div>
+  </div>
+</section>
+<br><br><br>
+
+<style>
+  section{padding:5% 0}
+.alizarin{margin-top: 32px;background: #d5db4440;}
+.amethyst{background:#9b59b6}
+.emerald{background:#2ecc71}
+.midnight-blue{background:#2c3e50}
+.peter-river{background:#3498db}
+.dl{background: url('https://images.unsplash.com/photo-1635545195955-e65d68631341?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=60');background-size: cover ;background-repeat: no-repeat; padding:30px 0;border-radius:20px;position:relative}
+.dl:before{content:" ";height:20px;width:20px;background:#ffffff;border-radius:20px;position:absolute;left:50%;top:20px;margin-left:-10px}
+.dl .brand{letter-spacing:3px;padding:10px 15px;margin-top:10px;text-align:center;min-height:100px}
+.dl .discount{min-height:50px;position:relative;font-size: 55px;
+    line-height: 70px;
+    text-align: center;
+    font-weight: 900;padding:20px 15px 0;color:#000000}
+.dl .discount:after{content:" ";border-right:20px solid transparent;border-left:20px solid transparent;position:absolute;bottom:-20px;left:20%}
+
+.dl .discount.peter-river:after{border-top:20px solid #3498db}
+.dl .discount.emerald:after{border-top:20px solid #2ecc71}
+.dl .discount.amethyst:after{border-top:20px solid #9b59b6}
+.dl .discount .type{font-size:20px;letter-spacing:1px;margin-top:-30px}
+.dl .descr{color:#000000;margin-top:10px;padding:20px 15px}
+.dl .ends{padding:0 15px;color:#000000;margin-bottom:10px}
+.dl .coupon{min-height:50px;text-align:center;font-weight:700;font-size:18px;padding:20px 15px}
+.dl .coupon a.open-code{color:#ffffff;}
+.dl .coupon .code{letter-spacing:1px;border-radius:4px;margin-top:10px;padding:10px 15px;color:#f1c40f;background:#f0f0f0}
+</style>
+
+
+
+
+
+
+
+
+
+<script>
+  function copyCode (code) {
+  // Get the text field
+  var copyText = document.getElementById("coupon-"+code).innerHTML
+  console.log(copyText)
+  return new Promise(async()=>{
+    try {
+      await navigator.clipboard.writeText(copyText);
+      console.log('Content copied to clipboard');
+      alert("Copied the text: " + copyText);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+
+  })
+}
+</script> 

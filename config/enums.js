@@ -1,6 +1,6 @@
 
 const ALERTS= Object.freeze({
-    ERR:"Invalid username or password",
+    ERR:"Invalid emailId or password",
     BLOCK:"Account has been blocked",
     EXIST:'This email is already connected to an account',
     ACCOUNT_ERR:"  Enter valid number",

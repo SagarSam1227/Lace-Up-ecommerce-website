@@ -5,7 +5,7 @@
         <div class="row" style="padding-top:9em">
                     <div class="col-md-6" style="padding-inline: 4em">
                         <div class="mb-25">
-                            <a href="" data-toggle="modal" data-target="#exampleModal">
+                            <a href="" data-toggle="modal"  data-target="#exampleModal">
                                 <button style="color: rgb(7, 127, 151); border-radius: 3em;width: 8em;border: none;height: 3em;">
                                     Add Address
                                 </button>
@@ -83,7 +83,12 @@
                                     </div>
                                     <div class="custome-radio">
                                         <input class="form-check-input" value="Paypal" required="" type="radio" name="payment_option" id="exampleRadios4" checked="">
-                                        <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse" data-target="#checkPayment" aria-controls="checkPayment">Paypal</label>
+                                        <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse" data-target="#checkPayment" aria-controls="checkPayment">Razorpay</label>
+                                       
+                                    </div>
+                                    <div class="custome-radio">
+                                        <input class="form-check-input" value="Wallet" required="" type="radio" name="payment_option" id="exampleRadios5" checked="">
+                                        <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse" data-target="#checkPayment" aria-controls="checkPayment">Wallet</label>
                                        
                                     </div>
                                     
@@ -109,37 +114,36 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
+                           <div class="modal-body">
 
-                                <form method="post" action="/newpayment-address">
+                                <form method="post" action="/add-address">
                                     <div class="form-group" style="float:left; width: 15.5em;">
-                                        <input type="text" required="" name="name" placeholder="Name *">
+                                        <input type="text"  required="" id="address-name" onkeyup="validateName()" name="name" placeholder="Name *">
                                     </div>
                                     <div class="form-group" style="float: right; width: 15.5em;">
-                                        <input type="text" required="" name="contact" placeholder="Mobile number *">
+                                        <input type="text" required="" id="address-no" onkeyup="validateNo()"  name="contact" placeholder="Mobile number *">
                                     </div>
                                     <div class="form-group" style="float:left; width: 15.5em;">
-                                        <input required="" type="text" name="pincode" placeholder="Pincode *">
+                                        <input required="" type="text" id="address-pincode" onkeyup="validatePincode()" name="pincode" placeholder="Pincode *">
                                     </div>
                                     <div class="form-group" style="float: right; width: 15.5em;">
-                                        <input required="" type="text" name="locality" placeholder="Locality *">
+                                        <input required="" type="text" name="locality" id="address-locality" onkeyup="validateLocality()"  placeholder="Locality *">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text"  required="" name="address" placeholder="Address *">
+                                        <input type="text"  required="" name="address" id="address-address" onkeyup="validateAddress()" placeholder="Address *">
 
                                     </div>
                                     <div class="form-group" style="float:left; width: 15.5em;">
-                                        <input required="" type="text" name="city" placeholder="City / Town/ District *">
+                                        <input required="" type="text" name="city" id="address-city" onkeyup="validateCity()"  placeholder="City / Town/ District *">
                                     </div>
                                     <div class="form-group" style="float: right; width: 15.5em;">
-                                        <input required="" type="text" name="state" placeholder="State *">
+                                        <input required="" type="text" name="state" id="address-state" onkeyup="validateState()" placeholder="State *">
                                     </div>
                                     <div class="form-group" style="float:left; width: 15.5em;">
-                                        <input type="text" name="landmark" placeholder="Landmark (Optional) *">
+                                        <input type="text" name="landmark" id="address-landmark" onkeyup="validateLandmark()" placeholder="Landmark (Optional) *">
                                     </div>
                                     <div class="form-group" style="float: right; width: 15.5em;">
-                                        <input type="text" name="contact2"
-                                            placeholder="Alternate Phone (Optional) *">
+                                        <input type="text" name="contact2" id="address-secondno" onkeyup="validateContactSecond()" placeholder="Alternate Phone (Optional) *">
                                     </div>
 
                             </div>
@@ -154,8 +158,207 @@
                 </div>
 
 
-{{!-- <script>
-    $(document).ready(function(){
-   window.history.replaceState("","",window.location.href)
-   });
-</script> --}}
+<script>
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
+
+
+ function validateName(){
+    const name = document.getElementById('address-name').value
+         if(name.length==0){
+         document.getElementById('address-name').style.borderColor='red'
+         return false;
+    }
+    var reg = new RegExp('^[0-9]$');
+
+    if(reg.test(name)==true){
+        document.getElementById('address-name').style.borderColor='red'
+         return false;
+    }
+
+    if(!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/))    
+    {
+        document.getElementById('address-name').style.borderColor='red'
+         return false;
+    }
+    
+    document.getElementById('address-name').style.borderColor='aquamarine'
+    return true;
+
+    }
+
+
+
+
+
+    function validateNo(){
+        const contact = document.getElementById('address-no').value
+        const regex = /[a-zA-Z]/;
+        if(contact.length==0){
+            document.getElementById('address-no').style.borderColor='red'
+            return false
+        } 
+
+        if(contact.length!==10){
+
+            document.getElementById('address-no').style.borderColor='red'
+            return false;
+        }
+        if(regex.test(contact)==true){
+        document.getElementById('address-no').style.borderColor='red'
+         return false;
+        }
+
+    
+        document.getElementById('address-no').style.borderColor='aquamarine'
+        return true
+    }
+
+
+
+
+
+    function validatePincode(){
+        const pincode = document.getElementById('address-pincode').value
+        const regex = /[a-zA-Z]/;
+        let x= 10 
+      
+        if(pincode.length<6 || pincode.length>6){
+            
+            document.getElementById('address-pincode').style.borderColor='red'
+            return false
+        }
+        if(regex.test(pincode)==true){
+        document.getElementById('address-pincode').style.borderColor='red'
+         return false;
+        }
+        document.getElementById('address-pincode').style.borderColor='aquamarine'
+        return true
+    }
+
+
+
+
+
+
+    function validateState(){
+        const state = document.getElementById('address-state').value
+
+    if(state.length==0){
+        
+            document.getElementById('address-state').style.borderColor='red'
+            return false
+    } 
+
+    const regex = /[0-9]/;
+    if(regex.test(state)==true){
+    
+        document.getElementById('address-state').style.borderColor='red'
+         return false;
+    }
+
+     document.getElementById('address-state').style.borderColor='aquamarine'
+    return true;
+
+    }
+
+
+
+
+ function validateLocality(){
+        const locality = document.getElementById('address-locality').value
+
+    if(locality.length==0){
+        
+            document.getElementById('address-locality').style.borderColor='red'
+            return false
+    } 
+
+    const regex = /[0-9]/;
+    if(regex.test(locality)==true){
+        document.getElementById('address-locality').style.borderColor='red'
+         return false;
+    }
+
+     document.getElementById('address-locality').style.borderColor='aquamarine'
+    return true;
+
+    }
+    
+
+
+
+
+ function validateAddress(){
+        const address = document.getElementById('address-address').value
+    if(address.length==0){
+    
+            document.getElementById('address-address').style.borderColor='red'
+            return false
+    } 
+
+     document.getElementById('address-address').style.borderColor='aquamarine'
+    return true;
+
+    }
+
+
+
+     function validateCity(){
+        const city = document.getElementById('address-city').value
+    if(city.length==0){
+        
+            document.getElementById('address-city').style.borderColor='red'
+            return false
+    } 
+
+     document.getElementById('address-city').style.borderColor='aquamarine'
+    return true;
+
+    }
+
+
+function validateLandmark(){
+        const landmark = document.getElementById('address-landmark').value
+    if(landmark.length==0){
+    
+            document.getElementById('address-landmark').style.borderColor='red'
+            return false
+    } 
+
+     document.getElementById('address-landmark').style.borderColor='aquamarine'
+    return true;
+
+    }
+
+
+
+
+
+    function validateContactSecond(){
+        const contactscnd = document.getElementById('address-secondno').value
+        const regex = /[a-zA-Z]/;
+        if(contactscnd.length==0){
+            document.getElementById('address-secondno').style.borderColor='red'
+            return false
+        } 
+
+        if(contactscnd.length!==10){
+
+            document.getElementById('address-secondno').style.borderColor='red'
+            return false;
+        }
+        if(regex.test(contactscnd)==true){
+        document.getElementById('address-secondno').style.borderColor='red'
+         return false;
+        }
+
+    
+        document.getElementById('address-secondno').style.borderColor='aquamarine'
+        return true
+    }
+
+    
+</script>

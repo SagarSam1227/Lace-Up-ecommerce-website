@@ -6,13 +6,30 @@ const userHelper = require("../helpers/user-helpers");
 const userController = require("./user-controller");
 const ALERTS = require("../config/enums");
 const orderHelper = require("../helpers/order-helpers");
+const categoryHelper = require("../helpers/category-helpers");
 
 module.exports = {
+
+
+  checkAdmin:async(req,res,next)=>{
+   
+   const admin= await userHelper.CHECK_ADMIN()
+   if(admin[0].admin===req.body.username && admin[0].password===req.body.password){
+    next()
+   }else{
+    req.session.adminErr=ALERTS.ERR
+    res.redirect('/admin')
+   }
+  },
+
+
   Admin_LoginPage: (req, res) => {
-    res.render("admin/admin-login", { admin: true, loginPage: true });
+    res.render("admin/admin-login", { admin: true, loginPage: true,adminErr:req.session.adminErr });
+    req.session.adminErr=false
   },
   display_Dashboard: (req, res) => {
-    res.render("admin/admin-dashboard", { admin: true });
+    res.render("admin/admin-dashboard", { admin: true});
+   
   },
 
   listProducts: (req, res) => {
@@ -30,13 +47,13 @@ module.exports = {
   add_Product: async(req, res) => {
     const proName = req.body.name
     const proImage = req.file.filename
-    console.log(req.body);
+   
     if(proImage.match('mp4')){
       req.session.vdoErr=ALERTS.VDO_ERR
       res.redirect("/admin/add-product")
     }else{
 
-      console.log(req.body);
+     
       const status = await productHelper.productExisting(proName,proImage)
       if(status){
         req.session.proExist=ALERTS.PRO_EXIST
@@ -44,14 +61,19 @@ module.exports = {
       }else{
         await productHelper
         .AddProduct(req.body, req.file.filename)
-        .then(res.redirect("/admin/add-product"));
+        .then(async(id)=>{
+       
+          await categoryHelper.AddProductToSub(req.body,id,req.file.filename)
+          
+          res.redirect("/admin/add-product");
+        })
+          
       }
-
     }
   },
 
   listFalse: async (req, res) => {
-    console.log('okkkkk');
+ 
     let prdctId = req.params.id;
     await productHelper
       .listUpdate(prdctId,false)
@@ -71,6 +93,7 @@ module.exports = {
 
   displayProducts: async(req, res, Session) => {
   await productHelper.findProduct().then((result) => {
+
       const data = JSON.parse(JSON.stringify(result));
       if (Session) {
         res.render("user/home", {
@@ -128,5 +151,41 @@ module.exports = {
     }
   },
 
-  
+
+  getOffers:async(req,res)=>{
+    await productHelper.findProduct().then((result)=>{
+      const data = JSON.parse(JSON.stringify(result))
+      res.render('admin/offers',{admin:true,data})
+
+    })
+  },
+
+
+  setOffers:async(req,res)=>{
+    
+    const discount = req.body.discount
+    await categoryHelper.subcategoryProducts(req.body.category,req.body.subcategory).then((result)=>{
+      const data = JSON.parse(JSON.stringify(result.products));
+      const productsId= data.map(ele=>ele.id)
+
+
+      productsId.forEach(async ele => {
+        await productHelper.updateOffer(ele,discount).then(
+          res.redirect('/admin/offers')
+        )
+      });
+    })
+  },
+
+  setOffersProduct:async(req,res)=>{
+   
+    const discount = req.body.discount
+    const name = req.body.product
+
+
+    await productHelper.updateOfferProduct(name,discount).then(
+      res.redirect('/admin/offers')
+    )
+  }
+
 };

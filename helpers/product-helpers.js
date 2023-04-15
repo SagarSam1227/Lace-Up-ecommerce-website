@@ -11,16 +11,22 @@ module.exports = {
         name: product.name,
         category: product.category,
         newPrice: product.newPrice,
-        oldPrice: product.oldPrice,
-        rating: product.rating,
         Image: filename,
         stock: +product.stock,
         list: true,
       });
-      productDetails.save();
-      resolve(productDetails);
+      let ID;
+      productDetails.save((err, doc) => {
+        if (err) {
+          console.log(err);
+        } else {
+          ID = doc._id;
+          resolve(ID);
+        }
+      });
     });
   },
+
   findProduct: () => {
     return new Promise(async (resolve, reject) => {
       let productFind = await Products.find();
@@ -32,30 +38,29 @@ module.exports = {
       id(data._id);
     });
   },
-  listUpdate: (id,state) => {
+  listUpdate: (id, state) => {
     return new Promise(async (resolve, reject) => {
-    const data=  await Products.updateOne(
-        { _id:id},
+      const data = await Products.updateOne(
+        { _id: id },
         {
-          list:state
+          list: state,
         }
       );
-      console.log('data iss ',data);
-      resolve()
+      resolve();
     });
   },
   productEdit: (id, data, filename) => {
     return new Promise(async (resolve, reject) => {
       await Products.updateOne(
         { _id: id },
-        { 
+        {
           name: data.name,
           category: data.category,
           newPrice: data.newPrice,
           oldPrice: data.oldPrice,
           rating: data.rating,
           Image: filename,
-          stock:data.stock
+          stock: data.stock,
         }
       );
       resolve();
@@ -80,7 +85,6 @@ module.exports = {
       let status = await Products.find({
         $or: [{ name: name }, { Image: Image }],
       });
-      console.log(status);
       if (status.length == 0) {
         resolve(false);
       } else {
@@ -92,6 +96,34 @@ module.exports = {
   stockUpdate: (id, count) => {
     return new Promise(async (resolve, reject) => {
       await Products.updateOne({ _id: id }, { $inc: { stock: -count } });
+    });
+  },
+
+  updateOffer: (id, discount) => {
+    return new Promise(async (resolve, reject) => {
+      await Products.updateOne(
+        {
+          _id: id,
+        },
+        {
+          offer: discount
+        }
+      );
+      resolve()
+    });
+  },
+
+  updateOfferProduct: (name, discount) => {
+    return new Promise(async (resolve, reject) => {
+      await Products.updateOne(
+        {
+          name: name,
+        },
+        {
+          offer: discount
+        }
+      );
+      resolve()
     });
   },
 };

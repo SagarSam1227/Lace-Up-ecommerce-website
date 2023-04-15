@@ -1,0 +1,240 @@
+ <div  style="margin-top: 4em;  margin-left:3em;">
+
+<div class="dropdown">
+  <button class="" style="color: rgb(7, 127, 151); border-radius: 3em;width: 8em;border: none;height: 3em;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+   Add Coupon
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" data-toggle="modal" data-target="#exampleModal-1">Amount</a></li>
+    <li><a class="dropdown-item" data-toggle="modal" data-target="#exampleModal-2" >Category</a></li>
+  </ul>
+</div>
+
+ </div>
+
+<section id="">
+  <div class="container">
+	<div class="row">
+    {{#each data}}
+
+        <div class="col-sm-6 col-md-3" style="width: 20%;">
+          <div class="dl">
+          
+            <div class="discount alizarin">{{discount}}%
+                <div class="type">off</div>
+            </div>
+            <div class="descr">
+                <strong style="color: #2c3e50;font-size: 18px;font-family: ddd;">• {{checkScheme scheme}}</strong> 
+             </div>
+            <div class="ends">
+                <small style="font-family: ddd;">Validity - {{number}}{{validity}} </small>
+            </div>
+            {{!-- <div class="coupon midnight-blue">
+                <a data-toggle="collapse" href="#code-{{code}}" class="open-code" style="font-family: monospace;">GET A CODE</a>
+                <div id="code-{{code}}" class="collapse code">
+                  <div id="coupon-{{code}}" style="width: fit-content;">
+                    {{code}}
+                  </div>
+                  <img style="width: 17px;float: right;margin-top:-1em;" onclick="copyCode('{{code}}')" src="https://cdn-icons-png.flaticon.com/512/1827/1827923.png" alt="">
+                </div>
+            </div> --}}
+          </div>
+        </div>
+    {{/each}}
+	</div>
+  </div>
+</section>
+<br><br><br>
+
+<style>
+  section{padding:5% 0}
+.alizarin{margin-top: 32px;background: #d5db4440;}
+.amethyst{background:#9b59b6}
+.emerald{background:#2ecc71}
+.midnight-blue{background:#2c3e50}
+.peter-river{background:#3498db}
+.dl{background: url('https://images.unsplash.com/photo-1635545195955-e65d68631341?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=60');background-size: cover;  background-repeat: no-repeat; padding:30px 0;border-radius:20px;position:relative}
+.dl:before{content:" ";height:20px;width:20px;background:#ffffff;border-radius:20px;position:absolute;left:50%;top:20px;margin-left:-10px}
+.dl .brand{letter-spacing:3px;padding:10px 15px;margin-top:10px;text-align:center;min-height:100px}
+.dl .discount{min-height:50px;position:relative;font-size: 55px;
+    line-height: 70px;
+    text-align: center;
+    font-weight: 900;padding:20px 15px 0;color:#000000}
+.dl .discount:after{content:" ";border-right:20px solid transparent;border-left:20px solid transparent;position:absolute;bottom:-20px;left:20%}
+
+.dl .discount.peter-river:after{border-top:20px solid #3498db}
+.dl .discount.emerald:after{border-top:20px solid #2ecc71}
+.dl .discount.amethyst:after{border-top:20px solid #9b59b6}
+.dl .discount .type{font-size:20px;letter-spacing:1px;margin-top:-30px}
+.dl .descr{color:#000000;margin-top:10px;padding:20px 15px}
+.dl .ends{padding:0 15px;color:#000000;margin-bottom:10px}
+.dl .coupon{min-height:50px;text-align:center;font-weight:700;font-size:18px;padding:20px 15px}
+.dl .coupon a.open-code{color:#ffffff;}
+.dl .coupon .code{letter-spacing:1px;border-radius:4px;margin-top:10px;padding:10px 15px;color:#f1c40f;background:#f0f0f0}
+</style>
+
+
+
+
+
+
+
+
+
+<div class="modal fade"  id="exampleModal-1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form action="/admin/coupons" method="post">
+
+        <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Coupon</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-sm">
+                 <div class="form-group">
+            <label for=""></label>Total Amount
+        <input type="text"  required="" name="Amount">
+        </div>
+            </div>
+            <div class="col-sm">
+        <div class="form-group">
+            <label for="">Discount percentage</label>
+        <input type="text"  required="" name="discount">
+        </div>
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col-sm">
+      <div class="form-group">
+            <label for="">number</label>
+        <input type="text"  required="" name="number">
+        </div>
+            </div>
+            <div class="col-sm">
+                <div class="form-group">
+            <label for="">Validity</label>
+           <select style="height: 2.8em;" id="" class="form-select"  aria-label="Default select example" name="day">
+  <option value="" hidden >Select </option>
+  <option value="Day"><a href="">Day</a></option>
+  <option value="Week"><a href="">Week</a></option>
+  <option value="Month"><a href="">Month</a></option>
+</select>
+        </div>
+            </div>
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+<div class="modal fade"  id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form action="/admin/coupons" method="post">
+
+        <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Coupon</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-sm">
+                 <div class="form-group">
+            
+
+
+                  <label class="form-label">Category</label>
+   <select id="category"  onchange="getSubcategory()"  class="form-select ml-5" style="width: 22em;
+    height: 3em;
+    margin-bottom: 1em;" aria-label="Default select example" name="category">
+  <option value="" hidden >Select category</option>
+  <option value="Men"><a href="">Men</a></option>
+  <option value="Women"><a href="">Women</a></option>
+  <option value="Kids"><a href="">Kids</a></option>
+</select>
+<label class="form-label">Sub-Category</label>
+   <select id="sub-category" class="form-select ml-5" style="width: 22em;
+    height: 3em;
+    margin-bottom: 1em;" aria-label="Default select example" name="subcategory">
+</select>
+
+
+
+
+
+
+        </div>
+            </div>
+            <div class="col-sm">
+        <div class="form-group">
+            <label for="">Discount percentage</label>
+        <input type="text"  required="" name="discount">
+        </div>
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col-sm">
+      <div class="form-group">
+            <label for="">number </label>
+        <input type="text"  required="" name="number">
+        </div>
+            </div>
+            <div class="col-sm">
+                <div class="form-group">
+            <label for="">Validity</label>
+           <select style="height: 2.8em;" id="" class="form-select"  aria-label="Default select example" name="day">
+  <option value="" hidden >Select </option>
+  <option value="Day"><a href="">Day</a></option>
+  <option value="Week"><a href="">Week</a></option>
+  <option value="Month"><a href="">Month</a></option>
+</select>
+        </div>
+            </div>
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+<script>
+  function copyCode (code) {
+  // Get the text field
+  var copyText = document.getElementById("coupon-"+code).innerHTML
+  return new Promise(async()=>{
+    try {
+      await navigator.clipboard.writeText(copyText);
+      console.log('Content copied to clipboard');
+      alert("Copied the text: " + copyText);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+
+  })
+}
+</script>
