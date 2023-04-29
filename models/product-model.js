@@ -31,7 +31,8 @@ const productSchema = new Schema({
   list:{
     type: Boolean,
     required: true
-  }
+  },
+  slug:String
 });
 
 const Product = mongoose.model("Product", productSchema);

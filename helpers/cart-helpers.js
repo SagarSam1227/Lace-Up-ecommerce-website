@@ -22,10 +22,20 @@ module.exports = {
   },
 
   updateProductDetails: (userID, productDetails) => {
+    console.log('dddddddddddddddddd',productDetails);
+    let subTotal
+    if(productDetails.offer){
+      subTotal = Math.floor(productDetails.newPrice-((productDetails.newPrice*productDetails.offer)/100))
+    }else{
+      subTotal = productDetails.newPrice
+    }
+
+    console.log('sub Total is ', subTotal);
+
     const productObj = {
-      productId: productDetails._id,
+      productId: productDetails._id,    
       count: 1,
-      subTotal: productDetails.newPrice,
+      subTotal: subTotal,
     };
     return new Promise(async (resolve, reject) => {
       const status = await cart.updateOne(
@@ -37,7 +47,7 @@ module.exports = {
   },
 
   GET_CART: (email) => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => {     
       const cartDetails = await cart.aggregate([
         {
           $match: { userId: email },
@@ -135,7 +145,19 @@ module.exports = {
         );
         resolve(true);
       });
+  },
+
+
+  GET_ONE_CART:(id)=>{
+    return new Promise(async(resolve,reject)=>{
+      const cartDetails= await cart.findOne({
+        _id:id
+      })
+      resolve(cartDetails)
+    })
   }
+
+  
 };
 
 // function Cart(user,product){

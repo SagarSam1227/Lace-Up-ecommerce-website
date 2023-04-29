@@ -151,3 +151,21 @@
 .fashion-studio-border:hover {
 	border-bottom: 1px solid #dee2e6!important;
 }</style>
+
+<script>
+
+	console.log('href is : ',window.location.href)
+
+	if(window.location.href=='http://localhost:3000/success-coupon'){
+		console.log('coooouuuuupppppooonnnnnn')
+
+		window.onload = function() {
+       Swal.fire({
+  title: 'Congrats !',
+  text: 'You got one coupon'
+})
+      }
+	}
+
+	
+</script>

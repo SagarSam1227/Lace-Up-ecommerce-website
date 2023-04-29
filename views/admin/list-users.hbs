@@ -30,7 +30,7 @@
   <td><span class="badge rounded-pill alert-success" style="width:5em">Active</span></td>
     <td>
 <button class="badge rounded-pill alert-info" style="height: 3em;width: 6em;">
-  <a href="/admin/user-block/{{_id}}">block</a>
+  <a href="/admin/user-block/{{slug}}">block</a>
 </button>
     </td>
     {{else}}
@@ -39,7 +39,7 @@
     </td>
   <td>
 <button class="badge rounded-pill alert-alert" style="height: 3em;width: 6em;">
-  <a href="/admin/user-unblock/{{_id}}">unblock</a>
+  <a href="/admin/user-unblock/{{slug}}">unblock</a>
 </button>
     </td>
     {{/if}}
@@ -62,4 +62,27 @@
   </tbody>
 </table>
     </div>
+<br>
+    <div class="container">
+     <nav aria-label="Page navigation example">
+
+  <ul class="pagination" style="justify-content: center;">
+    <li class="page-item">
+      <a style="pointer-events:{{checkPagecount pageCount}}" class="page-link" href="/admin/list-users/{{minus pageCount}}" aria-label="Previous">
+        <span  aria-hidden="true" style="color: #047b67;">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" style="color:black;pointer-events:none" href="#">{{plus pageCount}}</a></li>
+
+    <li class="page-item">
+      <a style="pointer-events:{{checkPagecountfull data}}" class="page-link" href="/admin/list-users/{{plus pageCount}}" aria-label="Next">
+        <span aria-hidden="true" style="color: #047b67;">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>
+<br>
+<br>
+<br>
 </section>

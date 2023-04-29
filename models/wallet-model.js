@@ -18,6 +18,7 @@ const walletSchema = new Schema({
       status: String,
     },
   ],
+  slug:String
 });
 
 const Wallet = mongoose.model("Wallet", walletSchema);

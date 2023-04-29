@@ -35,7 +35,8 @@ const userSchema = new Schema({
     state:String,
     landmark:String,
     contact2:String
-  }]
+  }],
+  slug:String
 });
 
 userSchema.pre("save", async function (next) {

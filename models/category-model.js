@@ -15,6 +15,8 @@ const categorySchema = new Schema({
   description: {
     type: String,
   },
+  list:Boolean,
+  slug:String
 });
 
 const category = mongoose.model("Category", categorySchema);

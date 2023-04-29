@@ -9,7 +9,9 @@ const sendOtp = require("../middlewares/twilio");
 const { Enqueue } = require("twilio/lib/twiml/VoiceResponse");
 const ALERTS = require("../config/enums");
 const orderHelper = require("../helpers/order-helpers");
-const walletHelper = require('../helpers/wallet-helpers')
+const walletHelper = require('../helpers/wallet-helpers');
+const slugify = require("../config/slugify");
+
 
 module.exports = {
   userHome: async (req, res) => {
@@ -17,7 +19,7 @@ module.exports = {
       const count = await cartHelper.getTotalCount(req.session.email);
 
       req.session.count = count;
-
+      
       adminController.displayProducts(req, res, (Session = true));
     } else {
       adminController.displayProducts(req, res);
@@ -44,6 +46,7 @@ module.exports = {
     let id = req.params.id;
     productHelper.findOneProduct(id).then((result) => {
       const data = JSON.parse(JSON.stringify(result));
+      console.log(data);
       if (req.session.email) {
         res.render("user/productDetails", {
           user: req.session.email,
@@ -53,14 +56,19 @@ module.exports = {
       } else {
         res.render("user/productDetails", { data });
       }
+    }).catch((error)=>{
+      res.render('error',{ERROR:error})
     });
   },
 
   postSignup: async (req, res) => {
     let data = req.body;
+
+    const slug = slugify.toSlug(req.body.email,req.body.username);
+
     await cartHelper.CREATE_CART(data);
     await walletHelper.CREATE_WALLET(data);
-    userHelper.addUser(data).then(res.redirect("/login"));
+    userHelper.addUser(data,slug).then(res.redirect("/login"));
   },
 
   loginCheck: (req, res, next) => {

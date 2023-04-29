@@ -18,24 +18,28 @@
     <link rel="icon" href="https://w1.pngwing.com/pngs/809/556/png-transparent-running-logo-sneakers-shoe-sports-shoes-footwear-clothing-aqua-electric-blue-thumbnail.png" type="image/gif" sizes="17x17">
     <!-- Template CSS -->
     <link rel="stylesheet" href="/assets/css/main.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    
     <script src="/assets/js/userAjax.js"></script>
     <script src="/assets/js/adminAjax.js"></script>
-
 
 </head>
   <body>
     {{#if admin}}
     {{>admin-header}}
     {{else}}
-{{>user-header}}
+    {{>user-header}}
     {{/if}}
 {{{body}}}
 
 
 
 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script>src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"</script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 {{!-- <script src="javascripts/index.js"></script> --}}

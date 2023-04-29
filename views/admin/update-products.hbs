@@ -1,7 +1,7 @@
 
 <br><br><br>
 <h5 class="text-center mb-3 mt-3 " style="padding-top: 3em;" >EDIT PRODUCT</h5>
-<form action="/admin/edit-product/{{data._id}}" enctype="multipart/form-data" method="post" style="margin-left: 18em;width:28em; margin-top:2em">
+<form action="/admin/edit-product/{{data.slug}}" enctype="multipart/form-data" method="post" style="margin-left: 18em;width:28em; margin-top:2em">
   <div class="form-group ml-5" style="width: 25em;">
     <label for="formGroupExampleInput">Name</label>
     <input type="text" name="name" class="form-control d-flex justify-content-center" id="formGroupExampleInput" value="{{data.name}}">

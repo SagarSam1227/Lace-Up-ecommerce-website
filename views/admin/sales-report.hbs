@@ -1,0 +1,174 @@
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.6/xlsx.full.min.js"></script>
+
+
+    {{#if data}}
+
+    <div class="container" style="width: 100%; height: 120px;margin-top:5em">
+
+    <div class="card card-body mb-4" style="background: #cbcbcb69;">
+ <div class="d-flex">
+
+  <div class="p-2">From</div>
+  <div class="p-2"> 
+    <input type="date" name="fromDate" id="from-date">
+  </div>
+  <div class="p-2">To</div>
+  <div class="p-2">
+    <input type="date" name="toDate" id="to-date">
+  </div>
+  <div class="ml-auto p-2">
+    <button onclick="filterOrder()" style="height: 46px; border-radius: 1em;border:none"><img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/search-1980719-1671929.png?f=avif&w=512" alt="" style="margin-top: 4px;height: 32px;"></button>
+  </div>
+  <div  class="p-2" style="margin-left: 470px;">
+    <button id="pdf"  style=" height: 35px;
+    padding-inline: 1em;
+    margin-top: 6px;
+    background: black;
+    color: antiquewhite;">PDF</button>
+  </div>
+  <div  class="p-2">
+     <button id="xlsheet" style="height: 35px;
+    padding-inline: 1em;
+    margin-top: 6px;
+    background: black;
+    color: antiquewhite;">Excel</button>
+  </div>
+</div>
+</div>
+</div>
+    <div id="sales-report" class="container">
+
+<table  class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">user</th>
+      <th scope="col">orderId</th>
+      <th scope="col">Date</th>
+      <th scope="col">Payment method</th>
+      <th scope="col">Status</th>
+    <th scope="col">Total</th>
+    </tr>
+  </thead>
+   
+  <tbody id="response-data">
+    {{#each data}}
+    <tr>
+      <td>{{userId}}</td>
+      <td>{{_id}}</td>
+      <td>{{orderDate}}</td>
+      <td>{{payMethod paymentMethod}}</td>
+      <td>{{status}}</td>
+      <td>₹ {{Total}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+ 
+</table>
+    </div>
+
+    
+{{/if}}
+
+
+
+<style>
+
+
+.btn-search {
+	  background: #424242;
+	  border-radius: 0;
+	  color: #fff;
+	  border-width: 1px;
+	  border-style: solid;
+	  border-color: #1c1c1c;
+	}
+	.btn-search:link, .btn-search:visited {
+	  color: #fff;
+	}
+	.btn-search:active, .btn-search:hover {
+	  background: #1c1c1c;
+	  color: #fff;
+	}
+.btn-search {
+	  background: #424242;
+	  border-radius: 0;
+	  color: #fff;
+	  border-width: 1px;
+	  border-style: solid;
+	  border-color: #1c1c1c;
+	}
+	.btn-search:link, .btn-search:visited {
+	  color: #fff;
+	}
+	.btn-search:active, .btn-search:hover {
+	  background: #1c1c1c;
+	  color: #fff;
+	}
+
+
+</style>
+
+
+<script>
+    $(document).ready(function(){
+        $('#pdf').click(function (e) {
+            console.log('pkddfdfdf')
+            swal("Are you sure want to download this ?", {
+                buttons: ["No", "Yes"],
+            }).then((res) => {
+                if (res) {
+                    event.preventDefault();
+                    var element = document.getElementById('sales-report');
+                    let randomNumber = Math.floor(Math.random() * (10000000000 - 1)) + 1;
+                    var opt = {
+                        margin: 0,
+                        filename: 'SalesReport' + randomNumber + '.pdf',
+                        html2canvas: { scale: 10 },
+                        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                    };
+
+                    html2pdf().set(opt).from(element).save();
+                }
+            })
+
+        })
+
+
+    })
+
+
+
+    $(document).ready(function(){
+        $('#xlsheet').on('click', function () {
+
+            swal("Are you sure want to download this ?", {
+                buttons: ["No", "Yes"],
+            }).then((res) => {
+                if (res) {
+                    const rows = $('#response-data tr');
+                    const data = [];
+
+
+                    // Loop through rows and cells to build the data array
+                    rows.each(function (index, row) {
+                        const rowData = [];
+                        $(row).find('th, td').each(function (index, cell) {
+                            rowData.push($(cell).text());
+                        });
+                        data.push(rowData);
+                    });
+
+                    // Convert the data array to a SheetJS workbook and sheet
+                    const ws = XLSX.utils.aoa_to_sheet(data);
+                    const wb = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+                    // Save the workbook as an Excel file
+                    XLSX.writeFile(wb, 'response-data.xlsx');
+                }
+            })
+
+        });
+    });
+</script>

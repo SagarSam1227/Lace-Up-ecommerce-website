@@ -1,80 +1,3 @@
-<br><br><br>
-
-<div class="container">
-  <div class="row">
-    <div class="col">
-        <center>
-  <h5 class="mb-3 " style="padding-top: 2em;" >Create Offers</h5>
-<form action="/admin/offers"  method="post" style="">
-  {{#if proExist}}
-                                           <div class="alert alert-danger" role="alert" style="width: 25.5em;">
-
-                                            <a href="" style="margin-left: 1em;">{{proExist}}</a>
-                                                <img src="https://cdn-icons-png.flaticon.com/512/1182/1182679.png" style="height: 1.3em; width: 1.3em; margin-bottom: -0.3em;" alt="">
-                                            </div>
-                                            {{/if}}
- <label class="form-label">Category</label>
-   <select id="category" onchange="getSubcategory()"  class="form-select ml-5" style="width: 22em;
-    height: 3em;
-    margin-bottom: 1em;" aria-label="Default select example" name="category">
-  <option value="" hidden >Select category</option>
-  <option value="Men"><a href="">Men</a></option>
-  <option value="Women"><a href="">Women</a></option>
-  <option value="Kids"><a href="">Kids</a></option>
-</select>
-<label class="form-label">Sub-Category</label>
-   <select id="sub-category" class="form-select ml-5" style="width: 22em;
-    height: 3em;
-    margin-bottom: 1em;" aria-label="Default select example" name="subcategory">
-</select>
-  <div class="form-group ml-5" style="width: 25em;"> 
-    <label for="formGroupExampleInput2">Discount</label>
-    <input type="value" required="" name="discount" class="form-control" onkeyup="validPrice('new-price')" id="new-price">
-  </div>
-  <button type="submit" class="btn btn-success" style="margin-top: 1em;">Create</button>
-    <br><br><br><br><br><br>
-</form> 
-        </center>
-    
-    </div>
-    <div class="col">
-        <center>
- <h5 class="mb-3 " style="padding-top: 2em;" >Create Offers</h5>
-<form action="/admin/offers-product" method="post" style="">
-  {{#if proExist}}
-                                           <div class="alert alert-danger" role="alert" style="width: 25.5em;">
-
-                                            <a href="" style="margin-left: 1em;">{{proExist}}</a>
-                                                <img src="https://cdn-icons-png.flaticon.com/512/1182/1182679.png" style="height: 1.3em; width: 1.3em; margin-bottom: -0.3em;" alt="">
-                                            </div>
-                                            {{/if}}
- <label class="form-label">Products</label>
-   <select id="category"  class="form-select ml-5" style="width: 22em;
-    height: 3em;
-    flow:down;
-    margin-bottom: 1em;" aria-label="Default select example" name="product">
-  <option value="" hidden >Select Poduct</option>
-  {{#each data}}
-  
-  <option ><a href="">{{name}}</a></option>
-  
-  {{/each}}
-</select>
-
-  <div class="form-group ml-5" style="width: 25em;"> 
-    <label for="formGroupExampleInput2">Discount</label>
-    <input type="value" required="" name="discount" class="form-control" onkeyup="validPrice('dis-count')" id="dis-count">
-  </div>
-  <button type="submit" class="btn btn-success" style="margin-top: 1em;">CREATE</button>
-    <br><br><br><br><br><br>
-</form> 
-        </center>
-     
-    </div>
-  </div>
-</div>
- 
-
 
 <script>
 
@@ -101,3 +24,206 @@ function validPrice(priceId){
 
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<section>
+    <div class="container mt-5">
+<table class="table table-hover" style="margin-top:5em">
+{{#if data}}
+ 
+<div class="dropdown" style="margin-top: 3em;">
+  <a style="margin-top:1em;border-radius: unset;color:aliceblue;background: #0e4764;padding-inline: 1.2em;" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+  Add offer
+  </a>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" data-toggle="modal" data-target="#exampleModal-1">Category offer</a></li>
+    <li><a class="dropdown-item" data-toggle="modal" data-target="#exampleModal-2">Product offer</a></li>
+  </ul>
+</div>
+
+
+
+    
+  <thead>
+    <tr>
+        <th scope="col">No.</th>
+      <th scope="col">Name</th>
+      <th scope="col">Category</th>
+      <th scope="col">price</th>
+      <th scope="col">Offer</th>
+      <th scope="col">Offer Price</th>
+      <th scope="col" style="width: 8em;">Status</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <br>
+
+    {{#each OFFER}}
+    
+    <tr>
+      <th scope="row">{{@index}}</th>
+      <td>{{name}}</td>
+      <td>{{category}}</td>
+      <td>₹ {{newPrice}}</td>
+      <td>{{offer}} %</td>
+      <td>₹ {{offerCalculate offer newPrice}}</td>
+      <td>
+        <a href="/admin/delete-offer/{{slug}}">
+        <button class="" style="border-radius: 0em;width: 5em;border: none;background: #000000d1;color:#ffff" onclick="return confirm('Do you want to de-activate {{this.name}}')">delete</button>
+        </a></td>
+    </tr>
+    {{/each}}
+     </tbody>
+</table>
+    </div>
+<br>
+       <div class="container">
+     <nav aria-label="Page navigation example">
+
+  <ul class="pagination" style="justify-content: center;">
+    <li class="page-item">
+      <a style="pointer-events:{{checkPagecount pageCount}}" class="page-link" href="/admin/list-products/{{minus pageCount}}" aria-label="Previous">
+        <span  aria-hidden="true" style="color: #047b67;">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" style="color:black;pointer-events:none" href="#">{{plus pageCount}}</a></li>
+
+    <li class="page-item">
+      <a style="pointer-events:{{checkPagecountfull data}}" class="page-link" href="/admin/list-products/{{plus pageCount}}" aria-label="Next">
+        <span aria-hidden="true" style="color: #047b67;">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>
+<br>
+<br>
+<br>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form action="/admin/offers"  method="post" style="">
+  <label class="form-label">Category</label>
+   <select id="category" onchange="getSubcategory()"  class="form-select" aria-label="Default select example" name="category">
+  <option value="" hidden >Select category</option>
+  <option value="Men"><a href="">Men</a></option>
+  <option value="Women"><a href="">Women</a></option>
+  <option value="Kids"><a href="">Kids</a></option>
+</select>
+<label class="form-label">Sub-Category</label>
+   <select id="sub-category" class="form-select" aria-label="Default select example" name="subcategory"></select>
+  <div class="form-group"> 
+    <label for="formGroupExampleInput2">Discount</label>
+    <input type="value" required="" name="discount" class="form-control" onkeyup="validPrice('new-price')" id="new-price">
+  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="Submit" class="btn btn-primary">Create</button>
+      </div>
+</form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form action="/admin/offers-product" method="post" style="">
+ <label class="form-label">Products</label>
+   <select id="product"  class="form-select" aria-label="Default select example" name="product">
+  <option value="" hidden >Select Poduct</option>
+  {{#each data}}
+  
+  <option ><a href="">{{name}}</a></option>
+  
+  {{/each}}
+</select>
+
+  <div class="form-group"> 
+    <label for="formGroupExampleInput2">Discount</label>
+    <input type="value" required="" name="discount" class="form-control" onkeyup="validPrice('dis-count')" id="dis-count">
+  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
+    </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    {{else}}
+    <div id="content" class="col-sm-12" style="text-align:center;">
+<style>
+    .error_img{
+    display: block;
+    text-align: center;
+    width: 16em;
+    margin-inline: 36em;
+    padding-top: 3em;
+    }
+    .btn.btn-mega{
+    text-align: center;
+    border: 1px solid #fff;
+    background: #fff;
+    padding: 10px 30px;
+    border-radius: 50px;
+    box-shadow: 0 0 9px 1px #eaeaea;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: 'Celiasbold';
+    background: black;
+    }
+                        </style>
+                        <img src="https://cdn-icons-png.flaticon.com/512/7486/7486747.png" class="error_img" >
+                        <h2 style="font-family: 'Celiasbold';font-size: 18px;color: #000;">No products</h2>
+                        <p style="margin-bottom: 2%;font-size: 14px;font-family: 'Celias';">Looks like you haven't added <br> any products yet </p>   
+                        <a href="/" class="btn btn-mega" style="">Add Product</a>
+                     </div>
+{{/if}}
+ 
+
+</section>
+
+
+
+
+
+

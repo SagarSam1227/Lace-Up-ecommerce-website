@@ -9,6 +9,7 @@ var multerFile = require("../config/multer");
 const categoryController = require("../controllers/category-controller");
 const orderController = require("../controllers/order-controller")
 const couponController= require('../controllers/coupon-controller')
+const bannerController = require('../controllers/banner-controller')
 
 router.get("/", adminSession.adminLogin, adminController.Admin_LoginPage);
 
@@ -43,7 +44,7 @@ router
   );
 
 router.get(
-  "/list-products",
+  "/list-products/:id",
   adminSession.adminCheck,
   adminController.listProducts
 );
@@ -74,17 +75,17 @@ router.get(
 router.get("/offers",adminSession.adminCheck,adminController.getOffers)
 router.post('/offers',adminController.setOffers)
 
+router.get('/delete-offer/:id',adminSession.adminCheck,adminController.deleteOffer)
+
 router.post('/offers-product',adminController.setOffersProduct)
 
 router.get('/coupons',adminSession.adminCheck,couponController.getCoupons)
 router.post('/coupons',couponController.postCoupon)
 
 
-router.get("/list-users", adminSession.adminCheck, adminController.usersList);
+router.get("/list-users/:id", adminSession.adminCheck, adminController.usersList);
 
-router.get("/subctegory-list", categoryController.listCategory);
-
-router.get('/list-orders',adminSession.adminCheck,orderController.orderList)
+router.get('/list-orders/:id',adminSession.adminCheck,orderController.orderList)
 
 router.get("/order-details-admin/:id",adminSession.adminCheck,orderController.orderView)
 
@@ -92,4 +93,21 @@ router.get("/logout", adminSession.adminCheck, adminSession.sessionDestroy);
 
 router.post('/change-status',orderController.changeStatus)
 
+router.get('/get-salesreport',adminSession.adminCheck,orderController.getSalesReport)
+
+router.post('/filter-salesreprort',adminSession.adminCheck,orderController.getSalesReport)
+
+router.get('/banner',adminSession.adminCheck,bannerController.getBanner)
+
+router.post('/banner',multerFile.uploads,adminSession.adminCheck,bannerController.postBanner)
+
+router.get('/list-true-banner/:id',adminSession.adminCheck,bannerController.trueList)
+
+router.get('/list-false-banner/:id',adminSession.adminCheck,bannerController.falseList)
+
+router.get('/list-true-category/:id',adminSession.adminCheck,categoryController.trueList)
+
+router.get('/list-false-category/:id',adminSession.adminCheck,categoryController.falseList)
+
 module.exports = router;
+ 

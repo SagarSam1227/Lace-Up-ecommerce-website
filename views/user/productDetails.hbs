@@ -53,27 +53,30 @@
                                     <div class="detail-info">
                                         <h2 class="title-detail">{{data.name}}</h2>
                                         <div class="product-detail-rating">
-                                            <div class="pro-details-brand">
-                                                <span> Brands: <a href="shop-grid-right.html">Bootstrap</a></span>
-                                            </div>
                                             <div class="product-rate-cover text-end">
                                                 <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width:90%">
+                                                    <div class="product-rating" style="width:100%">
                                                     </div>
                                                 </div>
                                                 {{!-- <span class="font-small ml-5 text-muted"> (25 reviews)</span> --}}
                                             </div>
                                         </div>
                                         <div class="clearfix product-price-cover">
+                                            {{#if data.offer}}
                                             <div class="product-price primary-color float-left">
-                                                <ins><span class="text-brand">${{data.newPrice}}</span></ins>
-                                                <ins><span class="old-price font-md ml-15">--offers--</span></ins>
-                                                {{!-- <span class="save-price  font-md color3 ml-15">25% Off</span> --}}
+                                                <ins><span class="text-brand">₹ {{offerCalculate data.offer data.newPrice}}</span></ins>
+                                                <ins><span class="old-price font-md ml-15">{{data.newPrice}}</span></ins>
+                                                <span class="save-price  font-md color3 ml-15">25% Off</span>
                                             </div>
+                                            {{else}}
+                                            <div class="product-price primary-color float-left">
+                                                <ins><span class="text-brand">₹{{data.newPrice}}</span></ins>
+                                            </div>
+                                            {{/if}}
                                         </div>
                                         <div class="bt-1 border-color-1 mt-15 mb-15"></div>
                                         <div class="short-desc mb-30">
-                                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam rem officia, corrupti reiciendis minima nisi modi, quasi, odio minus dolore impedit fuga eum eligendi? Officia doloremque facere quia. Voluptatum, accusantium!</p>
+                                        
                                         </div>
                                         <div class="product_sort_info font-xs mb-30">
                                             <ul>
@@ -94,16 +97,6 @@
                                                 <li><a href="#" data-color="Purple"><span class="product-color-purple"></span></a></li>
                                             </ul>
                                         </div> --}}
-                                        <div class="attr-detail attr-size">
-                                            <strong class="mr-10">Size</strong>
-                                            <ul class="list-filter size-filter font-small">
-                                                <li><a href="#">UK 2.5</a></li>
-                                                <li><a href="#">UK 3.5</a></li>
-                                                <li><a href="#">UK 4.5</a></li>
-                                                <li><a href="#">UK 5.5</a></li>
-                                                <li><a href="#">UK 6.5</a></li>
-                                            </ul>
-                                        </div>
                                         <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                                         <div class="detail-extralink">
                                             <div class="product-extra-link2">
@@ -114,15 +107,17 @@
                                                     </button> --}}
                                    
                                     </div>
-                                            <button type="button"  style="border-radius: unset;color: #ffffffc7;background: #0e4764;padding-inline: 8.2em;" class="btn btn-outline-info">
                                                 {{#if user}}
-                                                <a onclick="updateNumber('{{data._id}}')" id="mybtn" aria-label="Add  To Cart" class=" hover-up"  style="color: rgb(255, 255, 255);">ADD TO CART</a>
+                                            <button id="mybtn" onclick="updateNumber('{{data.slug}}')" type="button"  style="border-radius: unset;color: #ffffffc7;background: #0e4764;padding-inline: 8.2em;" class="btn btn-outline-info hover-up">ADD TO CART</button>
+                                                {{!-- <a   aria-label="Add  To Cart" class=" hover-up"  style="color: rgb(255, 255, 255);">ADD TO CART</a> --}}
                                                 {{else}}
-                                                  <a href="/login" aria-label="Add To Cart" class=" hover-up"   style="color: rgb(255, 255, 255);">ADD TO CART</a>
+                                                  <a href="/login">
+                                                  <button id="mybtn" type="button"  style="border-radius: unset;color: #ffffffc7;background: #0e4764;padding-inline: 8.2em;" class="btn btn-outline-info hover-up">ADD TO CART</button></a> 
+                                                  
                                           {{/if}}
 
                                           
-                                            </button>
+                                            
                                             <button type="button" style="border-radius: unset;color:turquoise;background: #000000;padding-inline: 7.3em; margin-top:2em" class="btn btn-outline-info">
                                                  <a aria-label="Add To Cart" class=" hover-up" href="/cart/{{_id}}" style="color: bisque;">ADD TO WISHLIST</a>
                                             </button>

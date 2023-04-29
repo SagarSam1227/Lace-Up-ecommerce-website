@@ -1,49 +1,79 @@
+<section class="pt-150 pb-150">
+  <div class="container">
+    <div class="row" style="justify-content: center;">
+          <div class="col-lg-5">
+            <div
+              class="login_wrap widget-taber-content p-30 background-white border-radius-10 mb-md-5 mb-lg-0 mb-sm-5"
+            >
+              <div class="padding_eight_all bg-white">
+                <div class="heading_s1">
+                  <h4 class="mb-30" style="margin-inline: 6em;">LOGIN</h4>
+                </div>
+                <br />
+                <form action="/login" method="post">
+                  <div class="form-group">
+                    <label class="float-left">Username</label>
+                    <input
+                      type="text"
+                      required=""
+                      name="email"
+                      placeholder=""
+                    />
+                  </div>
+                  <br />
+                  <div class="form-group">
+                    <label class="float-left">Password</label>
+                    <input
+                      required=""
+                      type="password"
+                      name="password"
+                      placeholder=""
+                    />
+                  </div>
+                  {{#if Err}}
+                    <div class="alert alert-danger" role="alert">
 
-   <section class="pt-150 pb-150" >
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 m-auto">
-                        <div class="row">
-                            <div class="col-lg-5"style="margin-top: -45px;margin-left: 20em;">
-                                <div class="login_wrap widget-taber-content p-30 background-white border-radius-10 mb-md-5 mb-lg-0 mb-sm-5">
-                                    <div class="padding_eight_all bg-white">
-                                        <div class="heading_s1">
-                                            <h4 class="mb-30" style="margin-inline: 6em;">LOGIN</h4>
-                                        </div>
-                                        <br>
-                                        <form action="/login" method="post">
-                                            <div class="form-group">
-                                                <label class="float-left">Username</label>
-                                                <input type="text" required="" name="email" placeholder="">
-                                            </div>
-                                            <br>
-                                            <div class="form-group">
-                                                <label class="float-left">Password</label>
-                                                <input required="" type="password" name="password" placeholder="">
-                                            </div>
-                                            {{#if Err}}
-                                           <div class="alert alert-danger" role="alert">
+                      <a href="" style="margin-left: 1em;">{{Err}}</a>
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/512/1182/1182679.png"
+                        style="height: 1.3em; width: 1.3em; margin-bottom: -0.3em;"
+                        alt=""
+                      />
+                    </div>
+                  {{/if}}
+                  {{#if Block}}
+                    <div class="alert alert-warning" role="alert">
 
-                                            <a href="" style="margin-left: 1em;">{{Err}}</a>
-                                                <img src="https://cdn-icons-png.flaticon.com/512/1182/1182679.png" style="height: 1.3em; width: 1.3em; margin-bottom: -0.3em;" alt="">
-                                            </div>
-                                            {{/if}}
-                                            {{#if Block}}
-                                            <div class="alert alert-warning" role="alert">
+                      <a href="" style="margin-left: 1em;">{{Block}}</a>
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/512/3756/3756730.png"
+                        style="height: 1.5em; width: 1.5em; margin-bottom: -0.3em;"
+                        alt=""
+                      />
+                    </div>
 
-                                            <a href="" style="margin-left: 1em;">{{Block}}</a>
-                                                <img src="https://cdn-icons-png.flaticon.com/512/3756/3756730.png" style="height: 1.5em; width: 1.5em; margin-bottom: -0.3em;" alt="">
-                                            </div>
-                
-                                            {{/if}}
+                  {{/if}}
 
-                                                <a class="text-muted" href="/otp-login" style="    float: right;margin-top: 1em;">Forgot password?</a>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-fill-out btn-block hover-up" style="margin-top: 4em;" name="login">Log in</button>
-                                            </div>
-                                            <br>
-                                            <div class="text-muted text-center">Need an account? <a href="/signup">Sign Up</a></div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                  <a
+                    class="text-muted"
+                    href="/otp-login"
+                    style="    float: right;margin-top: 1em;"
+                  >Forgot password?</a>
+                  <div class="form-group">
+                    <button
+                      type="submit"
+                      class="btn btn-fill-out btn-block hover-up"
+                      style="margin-top: 4em;"
+                      name="login"
+                    >Log in</button>
+                  </div>
+                  <br />
+                  <div class="text-muted text-center">Need an account?
+                    <a href="/signup">Sign Up</a></div>
+                </form>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+</section>

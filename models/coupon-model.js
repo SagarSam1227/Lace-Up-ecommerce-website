@@ -3,9 +3,12 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 const couponSchema = new Schema({
+  person: {
+    type: String,
+    required: true,
+  },
   scheme: {
     type: Object,
-    required: true,
   },
   discount: {
     type: String,
@@ -13,17 +16,17 @@ const couponSchema = new Schema({
   },
   validity: {
     type: String,
-    required: true,
   },
   number: {
     type: String,
+  },
+  code: {
+    type: String,
     required: true,
   },
-  code:{
-    type:String,
-    required:true
-  },
-  createdAt:{type: Date, default: Date.now}
+  userlist: [],
+  createdAt: { type: Date, default: Date.now },
+  slug:String
 });
 
 const Coupon = mongoose.model("coupon", couponSchema);

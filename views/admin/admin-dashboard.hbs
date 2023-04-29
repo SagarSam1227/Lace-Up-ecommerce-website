@@ -1,3 +1,5 @@
+<div class="hidden" id="cat-data">{{Stringifying data}}</div>
+<div class="hidden" id="cat-result">{{Stringifying result}}</div>
 
 <div class="container" style="margin-top:5em">
     <div class="row">
@@ -16,10 +18,11 @@
                                 </div>
                                 <h4 style="font-size: 25px;
     text-align: center;
-    color: cadetblue;">$13,456.5</h4>
-                                <span class="text-sm">
-                                    Shipping fees are not included
-                                </span>
+    color: cadetblue;">₹ {{counts.anualRevenue}}</h4> 
+    <center>
+ <span class="text-sm">Shipping fees are not included</span>
+    </center>
+                               
                             </div>
                         </article>
                     </div>
@@ -40,10 +43,10 @@
                                 </div>
                                 <h4 style="font-size: 25px;
     text-align: center;
-    color: cadetblue;">134</h4>
-                                <span class="text-sm">
-                                    Shipping fees are not included
-                                </span>
+    color: cadetblue;">{{counts.orderCount}}</h4>
+    <center>
+ <span class="text-sm">Shipping fees are not included</span>
+    </center>
                             </div>
                         </article>
                     </div>
@@ -63,10 +66,10 @@
                                 </div>
                                 <h4 style="font-size: 25px;
     text-align: center;
-    color: cadetblue;">13,45</h4>
-                                <span class="text-sm">
-                                    In 19 Categories
-                                </span>
+    color: cadetblue;">{{counts.productCount}}</h4>
+    <center>
+ <span class="text-sm">in 3 Categories</span>
+    </center>
                             </div>
                         </article>
                     </div>
@@ -86,10 +89,10 @@
                                 </div>
                                 <h4 style="font-size: 25px;
     text-align: center;
-    color: cadetblue;">1344</h4>
-                                <span class="text-sm">
-                                    Total signups
-                                </span>
+    color: cadetblue;">{{counts.userCount}}</h4>
+     <center>
+ <span class="text-sm">Total signups</span>
+    </center>
                             </div>
                         </article>
                     </div>
@@ -119,58 +122,140 @@
           <div class="charts">
         <div class="charts-card" style="
     border: none;">
-             <p class="chart=title">Top 5 products
+             <p class="chart=title">Based on Categories
              </p>
-             <div id="bar-chart"></div>
+             <div id="chart"></div>
         </div>
     </div>
       </div>
+      <center>
+        <a href="/admin/get-salesreport">
+      <button type="button" id="pdf" style="margin-top:4em;border-radius: unset;color:aliceblue;background: #0e4764;padding-inline: 8.2em;" class="btn btn-outline-info">Create report</button></a>
+      </center>
+
+      
     </div>
   </div>
 </div>
+<br><br><br><br>
 
   
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.37.2/apexcharts.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.6/xlsx.full.min.js"></script>
+
+
 
 <script>
+
+  
+  const DATA = JSON.parse(document.getElementById('cat-data').innerHTML)
+  const RESULT = JSON.parse(document.getElementById('cat-result').innerHTML)
+
+
+  console.log(RESULT)
+  let catName =[]
+  let catCount = []
+
+  for(let i=0; i<DATA.length;i++){
+    catName[i]=DATA[i]._id
+    catCount[i]=DATA[i].products
+  }
+  let monthCount = [0,0,0,0,0,0,0,0,0,0,0,0]
+
+  for(let i=0; i<=12;i++){
+    if(RESULT[i]!=undefined){
+    monthCount[12-(RESULT[i].month)]=RESULT[i].count
+    }
+  }
+  console.log(monthCount)
+
+
+  
+
+   
+
+
+
+
          var options = {
-         
           series: [{
-          name: 'series1',
-          data: [31, 40, 28, 51, 42, 109, 100],
-          responsive: true,
-            maintainAspectRatio: false
-        }, {
-          name: 'series2',
-          data: [11, 32, 45, 32, 34, 52, 41]
+          data: monthCount
         }],
           chart: {
-          height: 350,
-          type: 'area',
-          
+          type: 'bar',
+          height: 400
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            dataLabels: {
+              position: 'top',
+            },
+          }
         },
         dataLabels: {
-          enabled: false,
-          
+          enabled: true,
+          offsetX: -6,
+          style: {
+            fontSize: '10px',
+            colors: ['#fff']
+          }
         },
         stroke: {
-          curve: 'smooth',
-        
-        },
-        xaxis: {
-          type: 'datetime',
-          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+          show: true,
+          width: 1,
+          colors: ['#fff']
         },
         tooltip: {
-          x: {
-            format: 'dd/MM/yy HH:mm'
-          },
+          shared: true,
+          intersect: false
+        },
+        xaxis: {
+          categories: ['Dec','Nov','Oct','Sep','Aug','Jul','Jun','May','Apr','Mar','Feb','Jan',]
         },
         };
 
         var chart = new ApexCharts(document.querySelector("#bar-chart"), options);
         chart.render();
+
+
+
+
+
+
+
+
+
+
+                var options2 = {
+          series: catCount,
+          chart: {
+          width: 380,
+          type: 'pie',
+        },
+        labels: catName,
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options2);
+        chart.render();
+
+
+
+
+
 </script>
 
 

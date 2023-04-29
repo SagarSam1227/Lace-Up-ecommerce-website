@@ -26,7 +26,11 @@ const orderSchema = new Schema({
         }
     }
   ],
-  status:String
+  status:String,
+  DeliveredAt:false,
+  createdAt:{type: Date, default: Date.now},
+  slug:String,
+  reason:false
 });
 
 const order = mongoose.model("order", orderSchema);

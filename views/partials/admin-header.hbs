@@ -1,3 +1,8 @@
+  {{#if ERROR}}
+
+
+  {{else}}
+  
   {{#if loginPage}}
 
       <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
@@ -676,19 +681,22 @@
                                         <a href="/admin/categories">Categories</a>
                                     </li>
                                       <li>
-                                        <a href="/admin/list-products">Products</a>
+                                        <a href="/admin/list-products/0">Products</a>
                                     </li>
                                       <li>
-                                        <a href="/admin/list-users">Users</a>
+                                        <a href="/admin/list-users/0">Users</a>
                                     </li>
                                     <li>
-                                        <a href="/admin/list-orders">Orders</a>
+                                        <a href="/admin/list-orders/0">Orders</a>
                                     </li>
                                     <li>
                                         <a href="/admin/offers">Offers</a>
                                     </li>
                                      <li>
                                         <a href="/admin/coupons">Coupons</a>
+                                    </li>
+                                     <li>
+                                        <a href="/admin/banner">Banner</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -792,3 +800,5 @@
     </header>
     {{/if}}
 
+
+  {{/if}}

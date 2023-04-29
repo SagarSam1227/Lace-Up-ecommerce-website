@@ -1,3 +1,8 @@
+ {{#if ERROR}}
+
+
+  {{else}}
+
 
      {{#if loginPage}}
 
@@ -10,13 +15,13 @@
                 </div>
             </div>
         </div>
-    </header>
+   
 
     <div class="mobile-header-active mobile-header-wrapper-style">
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo" >
-                    <a href="index.html"><img src="/assets/imgs/theme/logo.svg" alt="logo"  style="margin-left: -5em;"></a>
+                    <a href="/"><img src="/assets/imgs/theme/lp.png" alt="logo"  style="margin-left: -5em;"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -174,7 +179,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index.html"><img src="/assets/imgs/theme/logo.svg" alt="logo"></a>
+                        <a href="/"><img src="/assets/imgs/theme/lp.png" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
@@ -378,18 +383,85 @@
                                     </li>
                                     {{#if user}}
                                      <li>
-                                        <a href="/get-orders">Orders</a>
+                                        <a href="/orders/0">Orders</a>
                                     </li>
                                     {{/if}}
                                      <li>
                                         <a href="">About</a>
                                     </li>
-                          
+                                    <li>
+                                       
+                                    </li>
+                                    <li>
+                                       
+                                    </li>
+                                     <li>
+                                       
+                                    </li>
+                                     <li>
+                                       
+                                    </li>
+                                     <li>
+                                       
+                                    </li>
+                                     <li>
+                                       
+                                    </li>
+                                    <li>
+                                       
+                                    </li>
+                                    <li>
+                                       
+                                    </li>
+                                    <li>
+                                       
+                                    </li>
+                                    <li>
+                                       
+                                    </li>
+                                     <li>
+                                       
+                                    </li>
+                                     <li>
+                                       
+                                    </li>
+                                     <li>
+                                       
+                                    </li>
+                                    {{#if user}}
+                                    <li>
+                    <div class="nav-item" role="presentation" style="">
+
+                        <a href="/cart">
+                            <span class="badge badge-pill badge-info" style="width: 2em;background: #2dd2c2;color: black;" id="cart-count">{{count}}</span>
+                            <img src="https://cdn-icons-png.flaticon.com/512/891/891462.png" alt=""style="height: 2.5em;">
+                        </a>
+                        </div>
+                                    </li>
+                                    <li>
+                                         <div class="dropdown">
+                            
+    <img  class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" src="https://cdn-icons-png.flaticon.com/512/552/552721.png" alt="" style="height:2.5em">
+  
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><p class="dropdown-item">{{user}}</p></li>
+    <li><a class="dropdown-item" href="/user-account">Account</a></li>
+    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+  </ul>
+</div>
+                                    </li>
+                                    {{else}}
+                                    <li>
+                            <button style="color:#866341;border-radius:50px; border:none">
+                            <a class="" href="/login">Login / Signup</a>
+                        </button>
+                                    </li>
+                        {{/if}}
                                 </ul>
                             </nav>
                         </div>
                     </div>
-                        {{#if user}}
+                        {{!-- {{#if user}}
                     <div class="nav-item" role="presentation" style="margin-left: 31em;">
 
                         <a href="/cart">
@@ -407,29 +479,31 @@
     <li><a class="dropdown-item" href="/user-account">Account</a></li>
     <li><a class="dropdown-item" href="/logout">Logout</a></li>
   </ul>
-</div>
+</div> --}}
                         {{!-- <button style="color:#866341;border-radius:50px; border:none">
                             <a style="" class="" href="/logout">Logout</a> --}}
-                        {{else}}
+                        {{!-- {{else}}
                             <button style="color:#866341;border-radius:50px; border:none">
                             <a class="" href="/login">Login / Signup</a>
                         </button>
-                        {{/if}}
-                        </div>
+                        {{/if}} --}}
+                
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
-                                    <img alt="Evara" src="/assets/imgs/theme/icons/icon-heart.svg">
-                                    <span class="pro-count white">4</span>
+                                {{#if user}}
+                                <a class="mini-cart-icon" href="/cart">
+                                    <img alt="icon" src="https://cdn-icons-png.flaticon.com/512/891/891462.png">
+                                    <span class="pro-count white">{{count}}</span>
                                 </a>
-                            </div>
-                            <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="shop-cart.html">
-                                    <img alt="Evara" src="/assets/imgs/theme/icons/icon-cart.svg">
-                                    <span class="pro-count white">2</span>
-                                </a>
+                                {{/if}}
+
+
+
+                             
+
+
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                     <ul>
                                         <li>
@@ -470,7 +544,7 @@
                             </div>
                             <div class="header-action-icon-2 d-block d-lg-none">
                                 <div class="burger-icon burger-icon-white">
-                                    <span class="burger-icon-top"></span>
+                                    <span  class="burger-icon-top"></span>
                                     <span class="burger-icon-mid"></span>
                                     <span class="burger-icon-bottom"></span>
                                 </div>
@@ -481,5 +555,11 @@
             </div>
         </div>
     </header>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.6/xlsx.full.min.js"></script>
     {{/if}}
 
+
+  
+  {{/if}}

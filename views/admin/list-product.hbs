@@ -3,8 +3,8 @@
     <div class="container mt-5">
 <table class="table table-hover" style="margin-top:5em">
 {{#if data}}
-    <div class="btn btn-info mb-5" style=" margin-top:3em; ">
-        <a style="color: white;" href="/admin/add-product">Add Product</a>
+    <div class="" style=" margin-top:3em; ">
+        <a style="color: white;" href="/admin/add-product"><button style="margin-top:1em;border-radius: unset;color:aliceblue;background: #0e4764;padding-inline: 1.2em;" class="btn btn-outline-info">Add Product</button></a>
     </div>
     
   <thead>
@@ -31,21 +31,47 @@
       <td>{{category}}</td>
       <td>{{newPrice}}</td>
       <td><img style="height: 50px; width:50px" src="/uploads/{{Image}}" alt=""></td>
-    <td><a class="" href="/admin/edit-product/{{_id}}"><img src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Compose-512.png" style="height: 2em;width:2em" alt=""></a></td>
+    <td><a class="" href="/admin/edit-product/{{slug}}"><img src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Compose-512.png" style="height: 2em;width:2em" alt=""></a></td>
     {{#if list}}
       <td>
-        <a href="/admin/list-false-product/{{_id}}">
+        <a href="/admin/list-false-product/{{slug}}">
         <button class="" style="border-radius: 0em;width: 5em;border: none;background: #000000d1;color:#ffff" onclick="return confirm('Do you want to unlist {{this.name}}')" >unlist</button>
         </a></td>
       {{else}}
       <td>
-        <a href="/admin/list-true-product/{{_id}}">
+        <a href="/admin/list-true-product/{{slug}}">
         <button class="" style="border-radius: 0em;width: 5em;border: none;background: #d1e7dd; color:#0f5132"  >list</button>
         </a></td>
       {{/if}}
     </tr>
-
     {{/each}}
+     </tbody>
+</table>
+    </div>
+<br>
+       <div class="container">
+     <nav aria-label="Page navigation example">
+
+  <ul class="pagination" style="justify-content: center;">
+    <li class="page-item">
+      <a style="pointer-events:{{checkPagecount pageCount}}" class="page-link" href="/admin/list-products/{{minus pageCount}}" aria-label="Previous">
+        <span  aria-hidden="true" style="color: #047b67;">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" style="color:black;pointer-events:none" href="#">{{plus pageCount}}</a></li>
+
+    <li class="page-item">
+      <a style="pointer-events:{{checkPagecountfull data}}" class="page-link" href="/admin/list-products/{{plus pageCount}}" aria-label="Next">
+        <span aria-hidden="true" style="color: #047b67;">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>
+<br>
+<br>
+<br>
+
     {{else}}
     <div id="content" class="col-sm-12" style="text-align:center;">
 <style>
@@ -75,7 +101,6 @@
                         <a href="/" class="btn btn-mega" style="">Add Product</a>
                      </div>
 {{/if}}
-  </tbody>
-</table>
-    </div>
+ 
+
 </section>

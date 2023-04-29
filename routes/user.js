@@ -34,7 +34,7 @@ router
 router.get("/logout", userSession.userLogout, userController.sessionDestroy);
 
 router.get("/product/:id", userController.each_Product_Details);
-
+       
 router.post("/get-subcategory", categoryController.getsubCategory);
 
 router.get("/subcategory-collection/obj", categoryController.categoryDisplay);
@@ -86,7 +86,7 @@ router.get(
 
 //Place order---------------
 
-router.get("/get-orders", userSession.userLogout, orderController.getOrder);
+router.get("/orders/:id", userSession.userLogout, orderController.getOrder);
 
 router.post(
   "/place-order",
@@ -103,6 +103,8 @@ router.get(
 
 router.get("/success", orderController.renderSuccess);
 
+router.get('/success-coupon',orderController.renderSuccess)
+
 router.post("/verify-payment", orderController.verifyPayment);
 
 // coupons-----------------
@@ -113,10 +115,13 @@ router.get(
   couponController.getCoupons
 );
 
+router.get('/my-coupons',userSession.userLogout,couponController.getMyCoupons)
+
+router.post('/apply-coupon',userSession.userLogout,couponController.applyCoupon)
+
 // wallet ----------------
 
-router.get('/wallet',userSession.userLogout,walletController.getWallet
-)
+router.get('/wallet',userSession.userLogout,walletController.getWallet)
 
 //change status------------
 

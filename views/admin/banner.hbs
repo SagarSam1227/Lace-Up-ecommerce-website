@@ -1,0 +1,110 @@
+<section class="content-main">
+
+            <div class="card" style="margin-top: 7em;border: none;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <form action="/admin/banner" enctype="multipart/form-data" method="post">
+                             <div class="mb-4">
+                                    <label for="product_slug" class="form-label">Title</label>
+                                    <input type="text" placeholder="Type here" class="form-control" id="sub" name="title" />
+                                </div>
+                                 <div class="mb-4">
+                                    <label class="form-label">Description</label>
+                                    <textarea name="description" placeholder="Type here" class="form-control"></textarea>
+                                </div> 
+                                <div class="mb-4">
+                                    <label for="product_slug" class="form-label">Link</label>
+                                    <input type="text" placeholder="Type here" class="form-control" id="sub" name="link" />
+                                </div>
+                                <div class="mb-4">
+                                    <label for="product_slug" class="form-label">Image</label>
+                                    <input type="file" name="Image" class="form-control" id="formGroupExampleInput2">
+                                </div>
+                               
+                               
+                                {{!-- {{#if cat}}
+                                           <div class="alert alert-danger" role="alert">
+
+                                            <a href="" style="margin-left: 1em;">{{cat}}</a>
+                                                <img src="https://cdn-icons-png.flaticon.com/512/1182/1182679.png" style="height: 1.3em; width: 1.3em; margin-bottom: -0.3em;" alt="">
+                                            </div>
+                                            {{/if}} --}}
+                                <div class="d-grid">
+                                    <button type="submit" id="pdf" style="margin-top:1em;border-radius: unset;color:aliceblue;background: #0e4764;padding-inline: 8.2em;" class="btn btn-outline-info">create</button>
+                                </div>
+                            </form>
+                        </div>
+                        {{#if data}}
+                        <div class="col-md-9">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Status</th>
+                                             
+                                            {{!-- <td>Delete</td> --}}
+                                        </tr>
+                                    </thead>
+
+                                {{#each data}}
+                                    <tbody>
+                                        <tr>
+                                            <td><img style="height: 50px; width:50px" src="/uploads/{{Image}}" alt="#"></td>
+                                            <td>{{title}}</td>
+                                            <td>{{description}}</td>
+       {{#if list}}
+      <td>
+        <a href="/admin/list-false-banner/{{_id}}">
+        <button class="" style="border-radius: 0em;width: 5em;border: none;background: #000000d1;color:#ffff" onclick="return confirm('Do you want to unlist {{this.name}}')" >unlist</button>
+        </a></td>
+      {{else}}
+      <td>
+        <a href="/admin/list-true-banner/{{_id}}">
+        <button class="" style="border-radius: 0em;width: 5em;border: none;background: #d1e7dd; color:#0f5132"  >list</button>
+        </a></td>
+      {{/if}}
+                                        </tr>
+                                        <tr>
+                                    </tbody>
+
+                                    {{/each}}
+                                </table>
+                            </div>
+                        </div>
+                        {{else}}
+                        
+                        
+                        <div id="content" class="col-sm-12" style="text-align:center;width: 67em;">
+<style>
+    .error_img{
+    display: block;
+    text-align: center;
+    width: 16em;
+    margin-inline: 25em;
+    }
+    .btn.btn-mega{
+    text-align: center;
+    border: 1px solid #fff;
+    background: #fff;
+    padding: 10px 30px;
+    border-radius: 50px;
+    box-shadow: 0 0 9px 1px #eaeaea;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: 'Celiasbold';
+    background: black;
+    }
+                        </style>
+                        <img src="https://minbury.com/empty%20cart%20icon.svg" class="error_img" >
+                        <h2 style="font-family: 'Celiasbold';font-size: 18px;color: #000;">Empty</h2>
+                        <p style="margin-bottom: 2%;font-size: 14px;font-family: 'Celias';">Looks like you haven't created <br> anything yet </p>   
+</div>
+{{/if}}
+                    </div> <!-- .row // -->
+                </div> <!-- card body .// -->
+            </div> <!-- card .// -->
+        </section> <!-- content-main end// -->

@@ -24,6 +24,35 @@
 
     </tr>
     {{/each}}
+
+     </tbody>
+</table>
+</div>
+<br>
+<div class="container">
+     <nav aria-label="Page navigation example">
+
+  <ul class="pagination" style="justify-content: center;">
+    <li class="page-item">
+      <a style="pointer-events:{{checkPagecount pageCount}}" class="page-link" href="/orders/{{minus pageCount}}" aria-label="Previous">
+        <span  aria-hidden="true" style="color: #047b67;">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" style="color:black;pointer-events:none" href="#">{{plus pageCount}}</a></li>
+
+    <li class="page-item">
+      <a style="pointer-events:{{checkPagecountfull data}}" class="page-link" href="/orders/{{plus pageCount}}" aria-label="Next">
+        <span aria-hidden="true" style="color: #047b67;">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>
+<br>
+<br>
+<br>
+
+
     {{else}}
     <div id="content" class="col-sm-12" style="text-align:center;">
                         <img src="https://cdn-icons-png.flaticon.com/512/7486/7486747.png" class="error_img" >
@@ -32,10 +61,9 @@
                         <a href="/" class="btn btn-mega" style="">Start Shopping</a>
 </div>
 
-  </tbody>
-</table>
+ 
     {{/if}}
-</div>
+
 
 
 

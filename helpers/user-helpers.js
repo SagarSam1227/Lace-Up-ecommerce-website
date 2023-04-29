@@ -11,13 +11,15 @@ module.exports = {
     })
   },
 
-  finding: () => {
+  finding: (skip) => {
     return new Promise(async (resolve, reject) => {
-      let findUser = await users.find();
+      let findUser = await users.countDocuments().find().limit(8).skip(skip);
+     
+      console.log('orderNum: ',findUser);
       resolve(findUser);
     });
   },
-  addUser: (user) => {
+  addUser: (user,slug) => {
     return new Promise(async (resolve, reject) => {
       let userDetails = new users({
         name: user.username,
@@ -25,17 +27,18 @@ module.exports = {
         contact: user.contact,
         password: user.password,
         status: true,
+        slug:slug
       });
       userDetails.save();
       resolve(userDetails);
     });
   },
-  updateFalse: (id) => {
-    users.updateOne({ _id: id }, { status: false }).then((data) => {});
+  updateFalse: (slug) => {
+    users.updateOne({ slug: slug }, { status: false }).then((data) => {});
   },
 
-  updateTrue: (id) => {
-    users.updateOne({ _id: id }, { status: true }).then((data) => {});
+  updateTrue: (slug) => {
+    users.updateOne({ slug: slug }, { status: true }).then((data) => {});
   },
   otpLogin: (mobile) => {
     return new Promise(async (resolve, reject) => {
@@ -126,4 +129,5 @@ module.exports = {
       resolve(address);
     });
   },
+
 };

@@ -30,7 +30,7 @@
                                             </div>
                                             {{/if}}
                                 <div class="d-grid">
-                                    <button onclick="checkExisting()"  class="btn btn-primary">create</button>
+                                    <button onclick="checkExisting()"  style="margin-top:1em;border-radius: unset;color:aliceblue;background: #0e4764;padding-inline: 8.2em;" class="btn btn-outline-info">create</button>
                                 </div>
                             </form>
                         </div>
@@ -49,7 +49,7 @@
                                             <th>sub category</th>
                                             <th>Description</th>
                                             <td>products</td>
-                                            {{!-- <td>Delete</td> --}}
+                                            <td>Status</td>
                                         </tr>
                                     </thead>
 
@@ -64,11 +64,18 @@
                                             <td>{{category}}</td>
                                             <td>{{sub}}</td>
                                             <td>{{description}}</td>
-                                            <td>60</td>
-                                            <td>
-                                                <button class="badge rounded-pill alert-info" style="height: 3em;width: 6em; background-color:rgb(34, 217, 202); border:none" >
-                                                    <a href="" style="color: black;">delete</a>
-                                                    </button></td>
+                                            <td>{{productCount products}}</td>
+                                             {{#if list}}
+      <td>
+        <a href="/admin/list-false-category/{{_id}}">
+        <button class="" style="border-radius: 0em;width: 5em;border: none;background: #000000d1;color:#ffff" onclick="return confirm('Do you want to unlist {{this.name}}')" >unlist</button>
+        </a></td>
+      {{else}}
+      <td>
+        <a href="/admin/list-true-category/{{_id}}">
+        <button class="" style="border-radius: 0em;width: 5em;border: none;background: #d1e7dd; color:#0f5132"  >list</button>
+        </a></td>
+      {{/if}}
                                         </tr>
                                         <tr>
                                     </tbody>

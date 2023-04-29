@@ -1,4 +1,5 @@
 
+const category = require("../models/category-model");
 const Category = require("../models/category-model");
 
 
@@ -9,6 +10,7 @@ module.exports = {
         category: data.category,
         sub: data.subcategory,
         description: data.description,
+        list:true
       });
       categoryDetails.save();
       resolve(categoryDetails);
@@ -26,7 +28,12 @@ module.exports = {
   findCategoryAdmin: () => {
     return new Promise(async (resolve, reject) => {
       let categoryFind = await Category.find();
-      resolve(categoryFind);
+      if(category==null){
+        reject('Page not found !')
+      }else{
+        
+        resolve(categoryFind);
+      }
     });
   },
   checkCategory: (cat, sub) => {
@@ -45,7 +52,7 @@ module.exports = {
   GET_SUBCATEGORY: (category) => {
     return new Promise(async (resolve, reject) => {
       const subcategoryList = await Category.find({
-        category: category,
+        category: category,list:true
       });
       resolve(subcategoryList);
     });
@@ -79,5 +86,16 @@ module.exports = {
       });
       resolve(details)
     })
+},
+
+CHANGE_LIST:(id,status)=>{
+  return new Promise(async(resolve,reject)=>{
+       await category.updateOne({
+          _id:id
+      },{
+          list:status
+      })
+      resolve()
+  })
 }
 }

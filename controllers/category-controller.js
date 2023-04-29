@@ -19,12 +19,15 @@ module.exports = {
   get_Categories: (req, res) => {
     categoryHelper.findCategoryAdmin().then((result) => {
       const data = JSON.parse(JSON.stringify(result));
+      console.log(data);
       res.render("admin/categories", {
         admin: true,
         data,
         cat: req.session.catexist,  
       });
       req.session.catexist = false;
+    }).catch((error)=>{
+      res.render('error',{ERROR:error})
     });
   },
 
@@ -49,9 +52,23 @@ module.exports = {
   await categoryHelper.GET_SUBCATEGORY(category).then((result)=>{
     const data = JSON.parse(JSON.stringify(result));
     const subCategory = data.map(ele=>ele.sub)
-    res.json(subCategory)
+    res.json(subCategory)    
   })
   },
 
-  listCategory: (req, res) => {},
+  falseList:async(req,res)=>{
+    const id = req.params.id
+
+    await categoryHelper.CHANGE_LIST(id,false).then(
+      res.redirect("/admin/categories")
+    )
+},
+
+trueList:async(req,res)=>{
+    const id = req.params.id
+
+    await categoryHelper.CHANGE_LIST(id,true).then(
+      res.redirect("/admin/categories")
+    )
+}
 };

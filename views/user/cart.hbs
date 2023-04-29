@@ -64,8 +64,8 @@
     text-align: center;
     color: rgb(7, 127, 151);
     font-weight: 900;"> Apply Coupon </h5>
-                        <input style="width: 20em;" type="text">
-                        <button type="button" class="btn btn-success" style="text-align:center;background-color:rgb(7, 127, 151)">Apply</button>
+                        <input style="width: 20em;" id="couponcode" type="text">
+                        <button type="button" onclick="applyCoupon('{{cartId}}',{{Total}})" class="btn btn-success" style="text-align:center;background-color:rgb(7, 127, 151)">Apply</button>
 
                             </div>
 
@@ -89,7 +89,7 @@
                                </div>
                                 <div class="d-inline-flex">
                                 <p class="font-l text-grey-5">Discount</p>
-                                <p class="font-l text-grey-5" style="margin-left: 6.2em;">₹ 0</p>
+                                <p class="font-l text-grey-5" id="dis-count" style="margin-left: 6.2em;">₹ {{discount}}</p>
                                </div>
                                <div class="d-inline-flex">
                                 <p class="font-l text-grey-5">Delivery Charges</p>
@@ -98,7 +98,7 @@
                                <hr>
                                <div class="d-inline-flex">
                                 <p class="mb-5 fw-500" style="font-weight:900;color:black">Total Amount</p>
-                                <p class="mb-5 fw-500" onclick="" style="margin-left: 4.4em;font-weight:900;color:black">₹ {{Total}}</p>
+                                <p class="mb-5 fw-500" onclick="" id="total-amount" style="margin-left: 4.4em;font-weight:900;color:black">₹ {{findTotal Total discount}}</p>
                                </div>
                                 <hr>
                                 <br>

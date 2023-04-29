@@ -16,7 +16,7 @@ module.exports = {
     res.redirect("/admin/dashboard");
   },
 
-  adminCheck: (req, res, next) => {
+   adminCheck: (req, res, next) => {
     if (req.session.admin) {
       next();
     } else {
