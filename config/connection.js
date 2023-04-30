@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const dbConnect = () => {
   try {
     mongoose.set("strictQuery", false);
-    mongoose.connect("mongodb://127.0.0.1:27017/footwears", {
+    mongoose.connect("mongodb+srv://sagarsam606:9Yel38wclJhSwywo@laceup.u8oxc8p.mongodb.net/test", {
       useNewUrlParser: true,
 
       useUnifiedTopology: true,
