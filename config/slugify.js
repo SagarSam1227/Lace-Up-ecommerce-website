@@ -1,6 +1,5 @@
 const slugify = require('slugify')
 
-
 module.exports={
  toSlug:(word1, word2)=> {
         const slug = slugify(`${word1} ${word2}`, {
